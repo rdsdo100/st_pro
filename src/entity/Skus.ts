@@ -1,7 +1,17 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne, OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
+import {Estoques} from "./Estoques";
+import {Lotes} from "./Lotes";
 
 @Entity()
-export class Sku {
+export class Skus {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -19,7 +29,7 @@ export class Sku {
     codigoEan : string
 
     @Column({name: 'unidade_venda'})
-   unidadeVenda : string
+    unidadeVenda : string
 
     @Column()
     ativo : boolean
@@ -29,5 +39,14 @@ export class Sku {
 
     @UpdateDateColumn({ type: "timestamp" })
     updatedAt: Date;
+
+
+
+
+
+
+    @OneToMany( () => Lotes , (lotes) =>lotes.skuIdfK )
+    lote: Lotes
+
 
 }

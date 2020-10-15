@@ -7,17 +7,20 @@ import {
     UpdateDateColumn
 } from "typeorm";
 
-import {Zona} from "./Zona";
+
+import {EstoqueEnderecos} from "./EstoqueEnderecos";
 
 
 @Entity()
-export class Estoque {
+export class Estoques {
 
     @PrimaryGeneratedColumn()
     id: number
 
     @Column({name: 'nome_estoque'})
     nomeEstoque: string
+
+
 
     @CreateDateColumn()
     createdAt: Date;
@@ -28,7 +31,7 @@ export class Estoque {
 
 
 
-    @OneToMany(() => Zona, (zona) => zona.estoqueIdfK)
-    zona:Zona[];
+    @OneToMany(() => EstoqueEnderecos, (estoqueEnderecos) => estoqueEnderecos.estoqueIdfK)
+    estoqueEnderecos:EstoqueEnderecos[];
 
 }
