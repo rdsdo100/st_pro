@@ -3,7 +3,7 @@ import {Request, Response} from "express";
 import { Controller, Get } from '@overnightjs/core';
 import {Usuarios} from "../entity/Usuarios";
 import {GrupoUsuarios} from "../entity/GrupoUsuarios";
-import {assinar} from "../config/Jwt";
+
 
 @Controller('login')
 export default class LoginController{
@@ -34,19 +34,8 @@ export default class LoginController{
                 }
             )
 
-            if ((!getUsuario?.nome) || (getUsuario?.senha != usuario.senha)) {
-                return response.json({message: "Usuario  ou senha incorreto!"})
-            }
 
-            const authorization = assinar(Number(getUsuario.id),
-                String(getUsuario.nome),
-                Number(getUsuario.usuariosIdfK.id))
 
-            return response.json({
-                id: getUsuario.id,
-                nomeUsuario: getUsuario.nome,
-                authorization
-            })
 
         } catch (error) {
 
