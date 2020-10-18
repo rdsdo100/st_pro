@@ -27,6 +27,7 @@ export class EstoqueEnderecos {
     @Column()
     nivel: string
 
+
     @Column()
     ativo:boolean
 
