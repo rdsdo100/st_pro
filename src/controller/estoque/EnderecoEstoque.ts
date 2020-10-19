@@ -17,5 +17,8 @@ interface cadastroEnderecos {
 export default class EnderecoEstoque {
     async index(request: Request , response: Response){
 
+
+
+
     }
 }

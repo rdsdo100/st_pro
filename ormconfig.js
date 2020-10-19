@@ -2,7 +2,7 @@
 module.exports = {
    type: process.env.TYPEORM_SCHEMA ,
    url: process.env.DATABASE_URL,
-   synchronize: true,
+   synchronize: false,
    logging: process.env.TYPEORM_LOGGING,
    entities: [
       process.env.TYPEORM_ENTITIES

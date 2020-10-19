@@ -5,7 +5,7 @@ import {Controller, Get, Post} from "@overnightjs/core";
 
 
 
-@Controller('Estoques')
+@Controller('estoques')
 export default class Estoque {
 
 
@@ -18,7 +18,7 @@ export default class Estoque {
             estoques.nomeEstoque = String(request.body.nomeEstoque)
 
             const getEstoques = getRepository(Estoques)
-            const retorno = getEstoques.find()
+            const retorno = await getEstoques.find()
             return response.json(retorno)
         }catch (err){
             return response.json({
@@ -35,7 +35,6 @@ export default class Estoque {
             const estoques = new Estoques()
 
             estoques.nomeEstoque = String(request.body.nomeEstoque)
-
             const getEstoques = getRepository(Estoques)
             const retorno = await getEstoques.save(estoques)
             return response.json(retorno)

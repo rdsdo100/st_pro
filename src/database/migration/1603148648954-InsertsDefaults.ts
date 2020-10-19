@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class InsertsDefaults1601089654462 implements MigrationInterface {
+export class InsertsDefaults1603148648954 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
 
@@ -8,7 +8,7 @@ export class InsertsDefaults1601089654462 implements MigrationInterface {
         insert into grupo_usuarios (id, nome ) VALUES
 (1 , 'root'),
 (2 , 'administrador'),
-(3 , 'adm. Estoque'),
+(3 , 'adm. Estoque');
 
 
         
@@ -19,7 +19,17 @@ export class InsertsDefaults1601089654462 implements MigrationInterface {
         
         `)
 
+        await queryRunner.query(`
+        insert into estoques (id, nome_estoque) values
+                                        (1 , 'PADRÃO');
+        
+        `)
+
+
+
+
     }
+
 
     public async down(queryRunner: QueryRunner): Promise<void> {
     }
