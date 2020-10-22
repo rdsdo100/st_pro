@@ -1,21 +1,18 @@
 import { Controller, Get, Post } from "@overnightjs/core";
 import {Request, Response} from "express";
-import { getConnection, getRepository, Transaction } from "typeorm";
+import {Between,  getRepository} from "typeorm";
 import { EstoqueEnderecos } from "../../entity/EstoqueEnderecos";
 import { Estoques } from "../../entity/Estoques";
-import Estoque from "./Estoque";
 
 interface IsCadastroEnderecos {
-    estoque: string,
-    zonaI: string ,
-    zonaF: string ,
-    ruaI: string ,
-    ruaF: string ,
-    colunaI: string ,
-    colunaF: string ,
-    nivelI: string ,
-    nivelF: string ,
-
+    estoque: number,
+    zona: string ,
+    ruaI: number ,
+    ruaF: number ,
+    colunaI: number ,
+    colunaF: number ,
+    nivelI: number,
+    nivelF: number ,
 
 }
 
@@ -23,63 +20,73 @@ interface IsCadastroEnderecos {
 export default class EnderecoEstoque {
     @Get()
     async index(request: Request , response: Response){
-
         const getEnderecoEstoqueRepository = getRepository(EstoqueEnderecos)
-
-
         const retorno = await getEnderecoEstoqueRepository.find()
-
         return response.json(retorno)
-
-
-
     }
 
 @Post()
-    async cadastroEnderecos (request: Request , response: Response){
+async cadastroEnderecos (request: Request , response: Response){
 
-        const enderecoEstoqueRepository = getRepository(EstoqueEnderecos)
-        const estoqueEnderecos = new EstoqueEnderecos
-        const estoque = new Estoques()
-    const ruaI = 1
-    const ruaF = 1
-    const colunaI = 1
-        const  colunaF = 10
+    const enderecoEstoqueRepository = getRepository(EstoqueEnderecos)
+    const estoqueEnderecos = new EstoqueEnderecos()
+    const gerador = {
+        estoque : Number(request.body.estoque) ,
+        zona: String(request.body.zona),
+        ruaI : Number(request.body.ruaI) ,
+        ruaF : Number(request.body.ruaF) ,
+        colunaI : Number(request.body.colunaI) ,
+        colunaF : Number(request.body.colunaF) ,
+        nivelI :Number(request.body.nivelI) ,
+        nivelF : Number(request.body.nivelF) ,
+    }
 
-    const nivelI = 1
-    const nivelF = 2
-        const teste = []
- let cont = 0
-
-    for (let i = ruaI ; i <= ruaF ; i++){
-        for (let j = colunaI ; j <= colunaF ; j++) {
-            for (let l = nivelI; l<= nivelF; l++) {
-
-                teste.push(`101-${i}-${j}-${l} -> ${cont ++ } `)
-
-
+    //verificar endereços
+    const verificarEnderecos = await enderecoEstoqueRepository.find(
+        {
+            where:{
+                zona : gerador.zona,
+                rua: Between(gerador.ruaI , gerador.ruaF),
+                coluna: Between(gerador.colunaI , gerador.colunaF),
+                nivel: Between(gerador.nivelI , gerador.nivelF),
             }
         }
+    )
+
+    if(verificarEnderecos.length ===  0 ){
+        const endercos = this.geradorEnderecos(gerador)
+        const retorno = await enderecoEstoqueRepository.save(endercos)
+        return response.json(retorno)
+    } else {
+        return response.json({
+                message: "existe endereçoa ja cadastrados nesta seleção!"
+            }
+        )
     }
+}
+    
+    geradorEnderecos (gerador: IsCadastroEnderecos) {
 
+        const estoques = new Estoques()
+        estoques.id = Number(gerador.estoque)
+        const enderecos: Array<EstoqueEnderecos> = []
 
+        for (let i = gerador.ruaI ; i <= gerador.ruaF ; i++){
+            for (let j = gerador.colunaI ; j <= gerador.colunaF ; j++) {
+                for (let l = gerador.nivelI; l<= gerador.nivelF; l++) {
+                    const estoqueEnderecos = new EstoqueEnderecos()
+                    estoqueEnderecos.zona = String(gerador.zona)
+                    estoqueEnderecos.rua = String(i)
+                    estoqueEnderecos.coluna = String(j)
+                    estoqueEnderecos.nivel = String(l)
+                    estoqueEnderecos.ativo = true
+                    estoqueEnderecos.estoqueIdfK = estoques
+                    enderecos.push(estoqueEnderecos)
+                }
+            }
+        }
 
-
-
-      /*  estoqueEnderecos.zona = '101'
-        estoqueEnderecos.rua = '2'
-        estoqueEnderecos.coluna = '2'
-        estoqueEnderecos.nivel = '2'
-        estoqueEnderecos.ativo = true
-        estoque.id = 1
-        estoqueEnderecos.estoqueIdfK = estoque
-
-
-       const retorno = await enderecoEstoqueRepository.save(estoqueEnderecos)*/
-
-    return response.json(teste)
-
+        return enderecos
 
     }
-
 }
