@@ -16,6 +16,15 @@ interface IsCadastroEnderecos {
 
 }
 
+interface IsBuscaEnderecos {
+    estoque: number,
+    zona: string ,
+    rua: number ,
+    coluna: number ,
+    nivelI: number
+
+}
+
 @Controller('estoques-endereco')
 export default class EnderecoEstoque {
     @Get()
