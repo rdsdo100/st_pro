@@ -3,13 +3,14 @@ import {
     CreateDateColumn,
     Entity, JoinColumn,
     ManyToOne,
-    OneToMany,
+    OneToMany, OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import Sku from "../controller/sku/Sku";
 import {Skus} from "./Skus";
 import {Estoques} from "./Estoques";
+import {EstoqueEnderecos} from "./EstoqueEnderecos";
 
 @Entity()
 export class Lotes {
@@ -36,5 +37,6 @@ export class Lotes {
     @JoinColumn([{name: "sku_id_fk", referencedColumnName: "id"}])
     skuIdfK: Skus
 
-
+    @OneToOne(() => EstoqueEnderecos, estoqueEnderecos => estoqueEnderecos.lote) // specify inverse side as a second parameter
+    estoqueEnderecos: EstoqueEnderecos;
 }

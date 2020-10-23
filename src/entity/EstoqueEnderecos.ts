@@ -3,11 +3,12 @@ import {
     CreateDateColumn,
     Entity,
     JoinColumn,
-    ManyToOne,
+    ManyToOne, OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
 import {Estoques} from "./Estoques";
+import {Lotes} from "./Lotes";
 
 @Entity()
 export class EstoqueEnderecos {
@@ -40,5 +41,10 @@ export class EstoqueEnderecos {
     @ManyToOne(() => Estoques, (estoques) => estoques.estoqueEnderecos, {eager: true})
     @JoinColumn([{name: "estoque_id_fk", referencedColumnName: "id"}])
     estoqueIdfK: Estoques
+
+
+    @OneToOne(() => Lotes    , lotes => lotes.estoqueEnderecos) // specify inverse side as a second parameter
+    @JoinColumn([{name: "lotes_id_fk", referencedColumnName: "id"}])
+    lote: Lotes;
 
 }

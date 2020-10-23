@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {Estoques} from "../../entity/Estoques";
 import {getRepository} from "typeorm";
-import {ClassMiddleware, Controller, Get, Middleware, Post} from "@overnightjs/core";
+import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {decodificar} from "../../config/Jwt";
 
 
