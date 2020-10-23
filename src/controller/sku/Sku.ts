@@ -1,9 +1,11 @@
 import {Request, Response} from "express";
 import {Skus} from "../../entity/Skus";
-import {Controller, Get, Post} from "@overnightjs/core";
+import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {getRepository} from "typeorm";
+import {decodificar} from "../../config/Jwt";
 
 @Controller('sku')
+@ClassMiddleware([decodificar])
 export default class Sku {
 
     @Get()

@@ -1,11 +1,13 @@
 import {Request, Response} from "express";
 import {Estoques} from "../../entity/Estoques";
 import {getRepository} from "typeorm";
-import {Controller, Get, Post} from "@overnightjs/core";
+import {ClassMiddleware, Controller, Get, Middleware, Post} from "@overnightjs/core";
+import {decodificar} from "../../config/Jwt";
 
 
 
 @Controller('estoques')
+@ClassMiddleware([decodificar])
 export default class Estoque {
 
 

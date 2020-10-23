@@ -1,8 +1,9 @@
-import { Controller, Get, Post } from "@overnightjs/core";
+import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {Request, Response} from "express";
 import {Between,  getRepository} from "typeorm";
 import { EstoqueEnderecos } from "../../entity/EstoqueEnderecos";
 import { Estoques } from "../../entity/Estoques";
+import {decodificar} from "../../config/Jwt";
 
 interface IsCadastroEnderecos {
     estoque: number,
@@ -26,6 +27,7 @@ interface IsBuscaEnderecos {
 }
 
 @Controller('estoques-endereco')
+@ClassMiddleware([decodificar])
 export default class EnderecoEstoque {
     @Get()
     async index(request: Request , response: Response){

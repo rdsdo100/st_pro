@@ -1,7 +1,9 @@
-import {Controller, Get, Post} from "@overnightjs/core";
+import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {Request, Response} from "express";
+import {decodificar} from "../../config/Jwt";
 
 @Controller('sku')
+@ClassMiddleware([decodificar])
 export default class Sku {
 
 
