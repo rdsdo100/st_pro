@@ -16,7 +16,7 @@ export class GrupoUsuarios {
     updatedAt: Date;
 
 
-    @OneToMany(() => Usuarios, (usuarios) => usuarios.usuariosIdfK)
+    @OneToMany(() => Usuarios, (usuarios) => usuarios.grupoUsuariosIdFk)
     usuarios:Usuarios[];
 
 }

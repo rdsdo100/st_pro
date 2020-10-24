@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 import {Between, getRepository} from "typeorm";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
 import {Estoques} from "../entity/Estoques";
+import {Get} from "@overnightjs/core";
 
 interface IsCadastroEnderecos {
     estoque: number,
@@ -24,21 +25,50 @@ interface IsBuscaEnderecos {
 
 }
 
-export default  class Enderecos{
+export default  class EnderecosBusiness{
 
+
+    async buscarTodosEnderecos() {
+        const getEnderecoEstoqueRepository = getRepository(EstoqueEnderecos)
+        let  retornos = await getEnderecoEstoqueRepository.find()
+        let retornosformatados = retornos.map(
+            retorno => {
+                // return {
+                //     zona : retorno.zona,
+                //     rua :retorno.rua,
+                //     coluna : retorno.coluna,
+                //     nivel : retorno.nivel,
+                //     literal: `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel} `
+                // }
+                return  `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel}`
+            }
+        )
+
+
+        return retornosformatados
+    }
 
     async cadastroEnderecos (gerador: IsCadastroEnderecos){
+        const enderecoEstoqueRepository = getRepository(EstoqueEnderecos)
+
+        this.isVerificarEndereco(gerador)
+
+        if(await this.isVerificarEndereco(gerador) === true ){
+            const endercos = this.geradorEnderecos(gerador)
+            const retorno = await enderecoEstoqueRepository.save(endercos)
+return retorno
+        } else {
+
+
+        }
 
 
 
 
-
-
-        //verificar endereços
 
     }
 
-    async verificarEndereco(gerador: IsCadastroEnderecos){
+    async isVerificarEndereco(gerador: IsCadastroEnderecos){
         const enderecoEstoqueRepository = getRepository(EstoqueEnderecos)
         const verificarEnderecos = await enderecoEstoqueRepository.find(
             {
@@ -52,13 +82,15 @@ export default  class Enderecos{
         )
 
         if(verificarEnderecos.length ===  0 ){
-            const endercos = this.geradorEnderecos(gerador)
-            const retorno = await enderecoEstoqueRepository.save(endercos)
+            return true
 
         } else {
-
+return false
 
         }
+
+
+        return false
     }
 
     geradorEnderecos (gerador: IsCadastroEnderecos) {
