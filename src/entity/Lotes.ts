@@ -7,7 +7,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-import Sku from "../controller/sku/Sku";
+import SkuController from "../controller/sku/SkuController";
 import {Skus} from "./Skus";
 import {Estoques} from "./Estoques";
 import {EstoqueEnderecos} from "./EstoqueEnderecos";

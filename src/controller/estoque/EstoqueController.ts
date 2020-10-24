@@ -8,7 +8,7 @@ import {decodificar} from "../../config/Jwt";
 
 @Controller('estoques')
 @ClassMiddleware([decodificar])
-export default class Estoque {
+export default class EstoqueController {
 
 
     @Get()

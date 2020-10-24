@@ -28,7 +28,7 @@ interface IsBuscaEnderecos {
 
 @Controller('estoques-endereco')
 @ClassMiddleware([decodificar])
-export default class EnderecoEstoque {
+export default class EnderecoEstoqueController {
     @Get()
     async index(request: Request , response: Response){
         const getEnderecoEstoqueRepository = getRepository(EstoqueEnderecos)

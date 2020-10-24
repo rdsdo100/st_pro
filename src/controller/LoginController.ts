@@ -3,6 +3,7 @@ import {Request, Response} from "express";
 import { Controller, Get } from '@overnightjs/core';
 import {Usuarios} from "../entity/Usuarios";
 import {GrupoUsuarios} from "../entity/GrupoUsuarios";
+import {assinar} from "../config/Jwt";
 
 
 @Controller('login')
@@ -21,7 +22,7 @@ export default class LoginController{
             const usuario = new Usuarios()
             const tipoUsuarios = new GrupoUsuarios()
 
-            usuario.nome = String(request.headers.user)
+            usuario.nomeUsuario = String(request.headers.user)
             usuario.senha = String(request.headers.password)
 
             const getUsuario = await usuariosRepository.findOne(
@@ -29,12 +30,21 @@ export default class LoginController{
                 {
 
                     where: [
-                        {nomeUsuario: usuario.nome}
+                        {nomeUsuario: usuario.nomeUsuario}
                     ]
                 }
             )
 
 
+          const authorization =   assinar(
+                Number(getUsuario?.id)
+                , String(getUsuario?.nomeUsuario)
+                , Number(getUsuario?.grupoUsuariosIdFk.id)
+
+            )
+
+            return response.json({
+                authorization : authorization})
 
 
         } catch (error) {

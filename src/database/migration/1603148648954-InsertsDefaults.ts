@@ -14,7 +14,7 @@ export class InsertsDefaults1603148648954 implements MigrationInterface {
         
         `)
         await queryRunner.query(`
-        insert into usuarios (id ,nome, email, senha, matricula, grupo_usuarios_id_fk) values
+        insert into usuarios (id ,nome_usuario, email, senha, matricula, grupo_usuarios_id_fk) values
         (1 , 'root' , 'root@root.com' , '123456' , '1' , 1);
         
         `)

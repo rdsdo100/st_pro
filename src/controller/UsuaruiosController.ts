@@ -21,12 +21,12 @@ export default class UsuaruiosController {
 
         try {
 
-            usuarios.nome = String(request.body.nome)
+            usuarios.nomeUsuario = String(request.body.nome)
             usuarios.email = String(request.body.email)
             usuarios.senha = String(request.body.senha)
             usuarios.matricula = String(request.body.matricula)
            grupoUsuaruios.id = Number(request.body.grupoUsuario)
-            usuarios.usuariosIdfK = grupoUsuaruios
+            usuarios.grupoUsuariosIdFk = grupoUsuaruios
 
             console.log(usuarios)
 

@@ -28,9 +28,14 @@ export class EstoqueEnderecos {
     @Column()
     nivel: string
 
-
     @Column()
     ativo:boolean
+
+    @Column({default: false})
+    reserva: boolean
+
+    @Column({name:"endereco_alocado" , default: false})
+     enderecoAlocado : boolean
 
     @CreateDateColumn()
     createdAt: Date;

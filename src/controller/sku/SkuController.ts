@@ -6,7 +6,7 @@ import {decodificar} from "../../config/Jwt";
 
 @Controller('sku')
 @ClassMiddleware([decodificar])
-export default class Sku {
+export default class SkuController {
 
     @Get()
     async index(request: Request , response: Response){

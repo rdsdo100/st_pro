@@ -13,8 +13,8 @@ export class Usuarios {
 @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
-    nome: string
+    @Column({name: "nome_usuario"})
+    nomeUsuario: string
 
     @Column({unique:true})
     email: string
@@ -34,7 +34,7 @@ export class Usuarios {
 
     @ManyToOne(() => GrupoUsuarios, (grupoUsuaruios) => grupoUsuaruios.usuarios, {eager: true})
     @JoinColumn([{name: "grupo_usuarios_id_fk", referencedColumnName: "id"}])
-    usuariosIdfK: GrupoUsuarios
+    grupoUsuariosIdFk: GrupoUsuarios
 
     
 }

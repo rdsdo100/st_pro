@@ -7,7 +7,7 @@ export class Usuarios1600782693568 implements MigrationInterface {
         
 create table if not exists usuarios (
                           id  serial not null primary key,
-                          nome varchar not null,
+                          nome_usuario varchar not null,
                           email varchar not null unique,
                           senha varchar not null,
                           matricula varchar not null,
