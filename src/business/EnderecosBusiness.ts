@@ -1,8 +1,6 @@
-import {Request, Response} from "express";
 import {Between, getRepository} from "typeorm";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
 import {Estoques} from "../entity/Estoques";
-import {Get} from "@overnightjs/core";
 
 interface IsCadastroEnderecos {
     estoque: number,
@@ -33,14 +31,14 @@ export default  class EnderecosBusiness{
         let  retornos = await getEnderecoEstoqueRepository.find()
         let retornosformatados = retornos.map(
             retorno => {
-                // return {
-                //     zona : retorno.zona,
-                //     rua :retorno.rua,
-                //     coluna : retorno.coluna,
-                //     nivel : retorno.nivel,
-                //     literal: `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel} `
-                // }
-                return  `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel}`
+                return {
+                    zona : retorno.zona,
+                    rua :retorno.rua,
+                    coluna : retorno.coluna,
+                    nivel : retorno.nivel,
+                    literal: `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel} `
+                }
+                //return  `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel}`
             }
         )
 
@@ -56,19 +54,14 @@ export default  class EnderecosBusiness{
         if(await this.isVerificarEndereco(gerador) === true ){
             const endercos = this.geradorEnderecos(gerador)
             const retorno = await enderecoEstoqueRepository.save(endercos)
-return retorno
+            return retorno
         } else {
-
 
         }
 
-
-
-
-
     }
 
-    async isVerificarEndereco(gerador: IsCadastroEnderecos){
+    async isVerificarEndereco(gerador: IsCadastroEnderecos) : Promise<boolean> {
         const enderecoEstoqueRepository = getRepository(EstoqueEnderecos)
         const verificarEnderecos = await enderecoEstoqueRepository.find(
             {
@@ -85,15 +78,14 @@ return retorno
             return true
 
         } else {
-return false
+            return false
 
         }
-
 
         return false
     }
 
-    geradorEnderecos (gerador: IsCadastroEnderecos) {
+    geradorEnderecos (gerador: IsCadastroEnderecos) : Array<object>{
 
         const estoques = new Estoques()
         estoques.id = Number(gerador.estoque)
