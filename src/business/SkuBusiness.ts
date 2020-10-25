@@ -29,7 +29,7 @@ export default class SkuBusiness{
         }
 
     }
-    async buscaSkuId(id:number){
+    async buscaSkuId(id:number) : Promise<Object>{
 
         try{
             const gitSkus = getRepository(Skus)
@@ -41,7 +41,7 @@ export default class SkuBusiness{
                     }
                 }
             )
-            return retorno
+            return {...retorno}
 
         }catch (err){
             return {
@@ -51,7 +51,7 @@ export default class SkuBusiness{
         }
 
     }
-    async cadastroSku(skud: Skus){
+    async cadastroSku(sku: Skus){
 
         try{
             const gitSkus = getRepository(Skus)
@@ -75,20 +75,22 @@ export default class SkuBusiness{
     }
 
     // retorna boolean true para a existencia do sku
-    async isSku(id:number) : Promise<boolean>{
+    async isSku(idSku:number) : Promise<boolean>{
+
 
         try{
             const gitSkus = getRepository(Skus)
 
             const retorno = await gitSkus.findOne(
                 {
-                    where: {
-                        id: id
-                    }
+
+                    where: [
+                        {id : idSku}
+                    ]
                 }
             )
 
-            if(retorno?.id !== null){
+            if(retorno?.id === idSku){
                 return true
             }
 

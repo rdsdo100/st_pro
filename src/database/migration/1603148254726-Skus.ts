@@ -12,7 +12,7 @@ export class Skus1603148254726 implements MigrationInterface {
                                     codigo_ncm varchar not null,
                                     codigo_ean varchar not null,
                                     unidade_venda varchar not null,
-                                    codigo_proximo_lote number default 1 ,
+                                    codigo_proximo_lote integer default 1 ,
                                     ativo boolean not null,
                                     "createdAt" timestamp default now() not null,
                                     "updatedAt" timestamp default now() not null
