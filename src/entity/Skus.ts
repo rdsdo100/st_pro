@@ -2,12 +2,10 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
-    ManyToOne, OneToMany,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-import {Estoques} from "./Estoques";
 import {Lotes} from "./Lotes";
 
 @Entity()

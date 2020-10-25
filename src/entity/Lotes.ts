@@ -3,13 +3,11 @@ import {
     CreateDateColumn,
     Entity, JoinColumn,
     ManyToOne,
-    OneToMany, OneToOne,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-import SkuController from "../controller/sku/SkuController";
 import {Skus} from "./Skus";
-import {Estoques} from "./Estoques";
 import {EstoqueEnderecos} from "./EstoqueEnderecos";
 
 @Entity()
@@ -24,7 +22,7 @@ export class Lotes {
     @Column()
     quantidade: number
 
-    @Column({type: "date"})
+    @Column()
     dataFabricacao: Date
 
     @CreateDateColumn()
