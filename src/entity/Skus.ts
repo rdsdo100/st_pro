@@ -31,6 +31,9 @@ export class Skus {
     @Column({name: 'unidade_venda'})
     unidadeVenda : string
 
+    @Column({name:"codigo_proximo_lote"})
+    codigoProximoLote: number
+
     @Column()
     ativo : boolean
 
