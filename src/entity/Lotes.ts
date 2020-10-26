@@ -22,7 +22,7 @@ export class Lotes {
     @Column()
     quantidade: number
 
-    @Column()
+    @Column({name: "data_fabricacao"})
     dataFabricacao: Date
 
     @CreateDateColumn()

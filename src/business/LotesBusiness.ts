@@ -4,8 +4,6 @@ import {Skus} from "../entity/Skus";
 import SkuBusiness from "./SkuBusiness";
 
 interface ICadastroLote {
-
-
     quantidade : number,
     skuIdfK : number,
 }
@@ -13,21 +11,24 @@ interface ICadastroLote {
 export default class LotesBusiness{
 
     async cadastroLotes(cadastroLote: ICadastroLote){
-        const lotesRepository = getRepository(Lotes)
+       const lotesRepository = getRepository(Lotes)
         const lote = new Lotes()
         const sku = new Skus()
+        console.log(cadastroLote)
+
 
         sku.id = cadastroLote.skuIdfK
-        lote.codigoLote = await this.criarNumeroLote(   cadastroLote.skuIdfK )
-
+        lote.codigoLote =   await this.criarNumeroLote(   cadastroLote.skuIdfK )
 
         lote.quantidade = cadastroLote.quantidade
-        lote.dataFabricacao = Date.now()
+        lote.dataFabricacao = new Date
         lote.skuIdfK = sku
 
         console.log(lote)
 
-        return await lotesRepository.save(lote)
+        const ok =  await lotesRepository.save(lote)
+
+        console.log(ok)
 
     }
 
@@ -50,19 +51,16 @@ export default class LotesBusiness{
         }
         let numenroLote: string ;
 
-
         //Devo revisar esse código
         let numeroSku = await skuRepository.findOne(
             {
                 where: {
                     id : idSku
                 }
-
             }
-
         )
 
-        sku.codigoProximoLote = Number(numeroSku?.codigoProximoLote ) + 1
+       sku.codigoProximoLote = Number(numeroSku?.codigoProximoLote ) + 1
         numenroLote = `${Date.now()}${numeroSku?.codigoProximoLote}`
         await skuRepository.update(Number(idSku) , sku )
         return numenroLote

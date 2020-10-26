@@ -8,11 +8,11 @@ export class Lotes1603148261859 implements MigrationInterface {
                                      id serial not null primary key,
                                      codigo_lote varchar not null,
                                      quantidade integer not null,
-                                     createdAt timestamp default now() not null,
-                                     updatedAt timestamp default now() not null,
+                                     data_fabricacao date not null,
+                                     "createdAt" timestamp default now() not null,
+                                     "updatedAt" timestamp default now() not null,
                                      sku_id_fk integer ,
-                                     constraint lotes_skus foreign key (sku_id_fk) references skus (id)
-                                                            
+                                     constraint lotes_skus foreign key (sku_id_fk) references skus (id)                                                          
 );
         `)
     }
