@@ -25,15 +25,14 @@ export default class Sku {
 
 const lotes = new LotesBusiness()
 
-           /* const quantidade = Number(request.body.quantidade)
-            const skuIdfK = Number(request.body.sku)*/
-
-        const quantidade = 104
-        const skuIdfK = 1
+            const quantidade = Number(request.body.quantidade)
+            const skuIdfK = Number(request.body.sku)
 
 
-       await lotes.cadastroLotes({quantidade , skuIdfK})
 
+
+const retorno = await lotes.cadastroLotes({quantidade , skuIdfK})
+return response.json(retorno)
 
 
 
