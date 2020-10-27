@@ -5,6 +5,12 @@ import SkuBusiness from "./SkuBusiness";
 import {formatDateMesAno} from "../util/formatDate";
 import {formatSku} from "../util/FormatSku";
 import {formatNumeroLote} from "../util/FomatNumeroLote";
+import {
+    buscarLoteIdRepository,
+    buscarLoteRepository,
+    cadastrarLoteRepository, criarNumeroLoteRepository,
+    listLotesRepository
+} from "../repository/LotesRepository";
 
 interface ICadastroLote {
     quantidade : number,
@@ -18,7 +24,6 @@ interface INumeroLote{
 export default class LotesBusiness{
 
     async cadastroLotes(cadastroLote: ICadastroLote){
-        const lotesRepository = getRepository(Lotes)
         const lote = new Lotes()
         const sku = new Skus()
         const testeLote = await this.criarNumeroLote( cadastroLote.skuIdfK , new Date() )
@@ -30,7 +35,7 @@ export default class LotesBusiness{
         lote.skuIdfK = sku
 
         if(testeLote.sucesso) {
-            const retorno = await lotesRepository.save(lote)
+            const retorno = await cadastrarLoteRepository(lote)
             return retorno
         }else{
             return {...lote , mesage: "Lote não cadastrado"}
@@ -41,7 +46,6 @@ export default class LotesBusiness{
     private async  criarNumeroLote(idSku: number, dataFabricacao: Date) : Promise<INumeroLote>{
 
         const skuBusiness = new SkuBusiness()
-
         let skuRetorno
         let numenroLoteRetorno
         let sucesso: boolean
@@ -53,7 +57,7 @@ export default class LotesBusiness{
             }
         }
 
-        const connection = getConnection();
+       const connection = getConnection();
         const queryRunner = connection.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
@@ -77,6 +81,7 @@ export default class LotesBusiness{
 
         }
 
+
         if (skuRetorno?.id) {
             numenroLoteRetorno = `L${formatSku(String(skuRetorno?.id))}${formatDateMesAno(dataFabricacao)}${formatNumeroLote(String(skuRetorno?.codigoProximoLote))}`
         }else {
@@ -90,13 +95,13 @@ export default class LotesBusiness{
         }
     }
 
-    async bucaLotes(){
+    async bucaLotes(numeroLote : string){
         const lotesRepository = getRepository(Lotes)
-        const lote = new Lotes()
+        return await buscarLoteRepository(numeroLote)
     }
 
     async listLotes(){
         const lotesRepository = getRepository(Lotes)
-        const lote = new Lotes()
+        return await listLotesRepository()
     }
 }
