@@ -12,10 +12,12 @@ import {
 } from "../repository/LotesRepository";
 
 interface ICadastroLote {
+    dataFabricacao?: Date,
     quantidade : number,
     skuIdfK : number,
 }
 interface INumeroLote{
+
     sucesso: boolean,
     numenroLote: string
 }
@@ -29,7 +31,7 @@ export default class LotesBusiness{
         sku.id = cadastroLote.skuIdfK
         lote.codigoLote = testeLote.numenroLote
         lote.quantidade = cadastroLote.quantidade
-        lote.dataFabricacao = new Date
+        lote.dataFabricacao = cadastroLote.dataFabricacao || new Date
         lote.skuIdfK = sku
 
         if(testeLote.sucesso) {
@@ -55,7 +57,7 @@ export default class LotesBusiness{
             }
         }
 
-       const connection = getConnection();
+        const connection = getConnection();
         const queryRunner = connection.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();

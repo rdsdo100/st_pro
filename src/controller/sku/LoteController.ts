@@ -2,7 +2,6 @@ import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {Request, Response} from "express";
 import {decodificar} from "../../config/Jwt";
 import LotesBusiness from "../../business/LotesBusiness";
-import {formatSku} from "../../util/FormatSku";
 
 interface ICadastroLote {
     codigoLote: number,
@@ -10,13 +9,9 @@ interface ICadastroLote {
     quantidade : number,
     skuIdfK : number,
 }
-
-
 @Controller('lote')
-//@ClassMiddleware([decodificar])
+@ClassMiddleware([decodificar])
 export default class Sku {
-
-
     @Get()
     async index(request: Request , response: Response){
 
@@ -24,14 +19,13 @@ export default class Sku {
     @Post()
     async cadastrolote(request: Request , response: Response){
 
-const lotes = new LotesBusiness()
-            const quantidade = Number(request.body.quantidade)
-            const skuIdfK = Number(request.body.sku)
+        const lotes = new LotesBusiness()
+        const quantidade = Number(request.body.quantidade)
+        const skuIdfK = Number(request.body.sku)
+        const dataFabricacao = request.body.dataFabricacao
 
-const retorno = await lotes.cadastroLotes({quantidade , skuIdfK})
-return response.json(retorno)
-
-
+        const retorno = await lotes.cadastroLotes({quantidade , skuIdfK , dataFabricacao})
+        return response.json(retorno)
 
     }
     @Get(':id')
