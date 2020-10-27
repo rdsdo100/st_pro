@@ -1,14 +1,6 @@
-import {getRepository} from "typeorm";
+import {getManager} from "typeorm";
 import {Skus} from "../entity/Skus";
-
-interface ISkus {
-    nomesku :  string
-    ativo : boolean
-    codigoEan :  string
-    codigoNCM :  string
-    shelfLife :  number
-    unidadeVenda :  string
-}
+import {buscarSkuIdRepository, cadastrarSkuRepository, listSkuRepository} from "../repository/SkusRepository";
 
 export default class SkuBusiness{
 
@@ -16,9 +8,7 @@ export default class SkuBusiness{
     async index(){
 
         try{
-            const gitSkus = getRepository(Skus)
-
-            const retorno = await gitSkus.find()
+            const retorno = await listSkuRepository()
             return retorno
 
         }catch (err){
@@ -29,18 +19,11 @@ export default class SkuBusiness{
         }
 
     }
+
     async buscaSkuId(id:number) : Promise<Object>{
 
         try{
-            const gitSkus = getRepository(Skus)
-
-            const retorno = await gitSkus.findOne(
-                {
-                    where: {
-                        id: id
-                    }
-                }
-            )
+            const retorno = await await buscarSkuIdRepository(id)
             return {...retorno}
 
         }catch (err){
@@ -49,29 +32,22 @@ export default class SkuBusiness{
                 mesage: err.mesage
             }
         }
-
     }
+
     async cadastroSku(sku: Skus){
 
         try{
-            const gitSkus = getRepository(Skus)
-         const skus = new Skus()
-
-
-            const retorno = await gitSkus.save(skus)
-
+            const retorno = await cadastrarSkuRepository(sku)
             return {
                 retorno ,
                 mesage: `Sku cadastrado ${retorno.id} - ${retorno.nomesku}.`
             }
-
         }catch (err){
             return  {
                 err ,
                 mesage: err.mesage
             }
         }
-
     }
 
     // retorna boolean true para a existencia do sku
@@ -79,16 +55,10 @@ export default class SkuBusiness{
 
 
         try{
-            const gitSkus = getRepository(Skus)
+            const gitSkus = getManager()
 
-            const retorno = await gitSkus.findOne(
-                {
+            const retorno = await buscarSkuIdRepository(idSku)
 
-                    where: [
-                        {id : idSku}
-                    ]
-                }
-            )
 
             if(retorno?.id === idSku){
                 return true
@@ -100,8 +70,6 @@ export default class SkuBusiness{
             return false
         }
     }
-
-
 
 
 }

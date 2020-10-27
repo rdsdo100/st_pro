@@ -65,6 +65,18 @@ const updateLoteRepository = async (lote : Lotes)=>{
     const lotesRepository = getManager()
 }
 
+const deleteSkuIDRepository = async (idLote : number) => {
+    const lotesRepository = getManager()
+    return lotesRepository.delete(Lotes , idLote)
+}
 
 
-export {criarNumeroLoteRepository , cadastrarLoteRepository , buscarLoteRepository , buscarLoteIdRepository ,listLotesRepository}
+
+export {criarNumeroLoteRepository ,
+    cadastrarLoteRepository ,
+    buscarLoteRepository ,
+    buscarLoteIdRepository ,
+    listLotesRepository ,
+    updateLoteRepository,
+    deleteSkuIDRepository
+}
