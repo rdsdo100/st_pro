@@ -60,7 +60,6 @@ export default class LotesBusiness{
             // since we have errors let's rollback changes we made
             await queryRunner.rollbackTransaction();
 
-
         } finally {
 
             // you need to release query runner which is manually created:
@@ -68,20 +67,6 @@ export default class LotesBusiness{
         }
         return numenroLote
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
