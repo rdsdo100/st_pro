@@ -1,74 +1,94 @@
-import {getConnection, getManager, getRepository} from "typeorm";
+import {getConnection,  getRepository} from "typeorm";
 import {Lotes} from "../entity/Lotes";
 import {Skus} from "../entity/Skus";
 import SkuBusiness from "./SkuBusiness";
-import Sku from "../controller/sku/LoteController";
+import {formatDateMesAno} from "../util/formatDate";
+import {formatSku} from "../util/FormatSku";
+import {formatNumeroLote} from "../util/FomatNumeroLote";
 
 interface ICadastroLote {
     quantidade : number,
     skuIdfK : number,
 }
+interface INumeroLote{
+    sucesso: boolean,
+    numenroLote: string
+}
 
 export default class LotesBusiness{
 
     async cadastroLotes(cadastroLote: ICadastroLote){
-       const lotesRepository = getRepository(Lotes)
+        const lotesRepository = getRepository(Lotes)
         const lote = new Lotes()
         const sku = new Skus()
-
+        const testeLote = await this.criarNumeroLote( cadastroLote.skuIdfK , new Date() )
+        console.log(testeLote.numenroLote)
         sku.id = cadastroLote.skuIdfK
-        lote.codigoLote =   await this.criarNumeroLote( cadastroLote.skuIdfK , new Date() )
-
+        lote.codigoLote = testeLote.numenroLote
         lote.quantidade = cadastroLote.quantidade
         lote.dataFabricacao = new Date
         lote.skuIdfK = sku
 
-        const retorno =  await lotesRepository.save(lote)
-        return retorno
+        if(testeLote.sucesso) {
+            const retorno = await lotesRepository.save(lote)
+            return retorno
+        }else{
+            return {...lote , mesage: "Lote não cadastrado"}
+        }
 
     }
 
-    private async  criarNumeroLote(idSku: number, dataFabricacao: Date) : Promise<string>{
+    private async  criarNumeroLote(idSku: number, dataFabricacao: Date) : Promise<INumeroLote>{
 
         const skuBusiness = new SkuBusiness()
-        let numenroLote: string = '' ;
-        if(!skuBusiness.isSku(Number(idSku))){ }
 
-        //Devo revisar esse código
+        let skuRetorno
+        let numenroLoteRetorno
+        let sucesso: boolean
+
+        if(!skuBusiness.isSku(Number(idSku))){
+            return {
+                sucesso : false ,
+                numenroLote : "Erro"
+            }
+        }
 
         const connection = getConnection();
         const queryRunner = connection.createQueryRunner();
         await queryRunner.connect();
-
-        //await queryRunner.query("SELECT * FROM users");
-        //const users = await queryRunner.manager.find(Skus);
-// lets now open a new transaction:
         await queryRunner.startTransaction();
-        try {
-            // execute some operations on this transaction:
-         const skuRetorno =  await queryRunner.manager.findOne(Skus , idSku);
-            await queryRunner.manager.update(Skus, idSku, {codigoProximoLote : Number(skuRetorno?.codigoProximoLote) + 1} )
-            numenroLote = String(skuRetorno?.codigoProximoLote)
-          /*  await queryRunner.manager.save(user2);
-            await queryRunner.manager.save(photos);*/
 
+        try {
+
+            skuRetorno =  await queryRunner.manager.findOne(Skus , idSku);
+            await queryRunner.manager.update(Skus, idSku, {codigoProximoLote : Number(skuRetorno?.codigoProximoLote) + 1} )
+            sucesso = true
             // commit transaction now:
             await queryRunner.commitTransaction();
 
         } catch (err) {
-
+            sucesso = false
             // since we have errors let's rollback changes we made
             await queryRunner.rollbackTransaction();
 
         } finally {
-
             // you need to release query runner which is manually created:
             await queryRunner.release();
+
         }
-        return numenroLote
+
+        if (skuRetorno?.id) {
+            numenroLoteRetorno = `L${formatSku(String(skuRetorno?.id))}${formatDateMesAno(dataFabricacao)}${formatNumeroLote(String(skuRetorno?.codigoProximoLote))}`
+        }else {
+            sucesso = false
+            numenroLoteRetorno = 'Erro'
+        }
+
+        return {
+            sucesso ,
+            numenroLote : numenroLoteRetorno
+        }
     }
-
-
 
     async bucaLotes(){
         const lotesRepository = getRepository(Lotes)

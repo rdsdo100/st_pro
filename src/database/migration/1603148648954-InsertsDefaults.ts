@@ -15,7 +15,7 @@ export class InsertsDefaults1603148648954 implements MigrationInterface {
         `)
         await queryRunner.query(`
         insert into usuarios (id ,nome_usuario, email, senha, matricula, grupo_usuarios_id_fk) values
-        (1 , 'root' , 'root@root.com' , '123456' , '1' , 1);
+        (1 , 'root' , 'root@root.com' , '123456' , '123' , 1);
         
         `)
 
@@ -24,12 +24,15 @@ export class InsertsDefaults1603148648954 implements MigrationInterface {
                                         (1 , 'PADRÃO');
         
         `)
-
-
-
+        await queryRunner.query(`
+        
+        INSERT INTO skus (id, nome_sku, shelf_life, codigo_ncm, codigo_ean, unidade_venda ,ativo) VALUES
+                (1 , 'CARVEJA' , 180 , '12345678' , '1234567890123', 'UN' , true);
+        
+        
+        `)
 
     }
-
 
     public async down(queryRunner: QueryRunner): Promise<void> {
     }

@@ -2,6 +2,7 @@ import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {Request, Response} from "express";
 import {decodificar} from "../../config/Jwt";
 import LotesBusiness from "../../business/LotesBusiness";
+import {formatSku} from "../../util/FormatSku";
 
 interface ICadastroLote {
     codigoLote: number,
