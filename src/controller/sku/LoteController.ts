@@ -25,12 +25,8 @@ export default class Sku {
     async cadastrolote(request: Request , response: Response){
 
 const lotes = new LotesBusiness()
-
             const quantidade = Number(request.body.quantidade)
             const skuIdfK = Number(request.body.sku)
-
-
-
 
 const retorno = await lotes.cadastroLotes({quantidade , skuIdfK})
 return response.json(retorno)

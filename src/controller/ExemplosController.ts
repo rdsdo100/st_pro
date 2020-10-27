@@ -189,78 +189,56 @@ export default class ExemplosController {
                             body:{}}
                     }
                 },
-                "estoque-endereco": {
-                    rota: "/estoques-endereco",
-                    requisicao: {
-                        get: {
-                            heades: {},
-                            params: "",
-                            body:{}
-                        },
-                        post: {
-                            heades: {},
-                            params: "",
-                            body:{
-                                "estoque" : "number" ,
-                                "zona": "string",
-                                "ruaI" : "number" ,
-                                "ruaF" : "number" ,
-                                "colunaI" : "number" ,
-                                "colunaF" : "number"  ,
-                                "nivelI" : "number"  ,
-                                "nivelF" : "number"
-                            }
-                        },
-                        delete: {
-                            heades: {},
-                            params: "/number",
-                            body:{}
-                        },
-                        update:{ heades: {},
-                            params: "/number",
-                            body:{}}
-                    }
-                }
+
+
             }
         )
+    }
+
+    @Get('endereco')
+    exemploEndereco(_: Request , response: Response){
+        response.json(
+            {
+            "estoque-endereco": {
+                rota: "/estoques-endereco",
+                requisicao: {
+                    get: {
+                        heades: {},
+                        params: "",
+                        body:{}
+                    },
+                    post: {
+                        heades: {},
+                        params: "",
+                        body:{
+                            "estoque" : "number" ,
+                            "zona": "string",
+                            "ruaI" : "number" ,
+                            "ruaF" : "number" ,
+                            "colunaI" : "number" ,
+                            "colunaF" : "number"  ,
+                            "nivelI" : "number"  ,
+                            "nivelF" : "number"
+                        }
+                    },
+                    delete: {
+                        heades: {},
+                        params: "/number",
+                        body:{}
+                    },
+                    update:{ heades: {},
+                        params: "/number",
+                        body:{}}
+                }
+            },
+        })
     }
 
     @Get('lote')
     exemploLote (_: Request , response: Response){
         response.json(
             {
-                lote: {
-                    rota: "/lote",
-                    requisicao: {
-                        get: {
-                            heades: {},
-                            params: "",
-                            body:{}
-                        },
-                        getId: {
-                            heades: {},
-                            params: "/lote/:id",
-                            body:{}
-                        },
 
-                        post: {
-                            heades: {},
-                            params: "",
-                            body:{
-                                "quantidade": "number" ,
-                                "sku": "number"
-                            }
-                        },
-                        delete: {
-                            heades: {},
-                            params: "/number",
-                            body:{}
-                        },
-                        update:{ heades: {},
-                            params: "/number",
-                            body:{}}
-                    }
-                },
 
             }
         )

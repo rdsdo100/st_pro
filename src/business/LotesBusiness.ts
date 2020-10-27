@@ -6,9 +6,8 @@ import {formatDateMesAno} from "../util/formatDate";
 import {formatSku} from "../util/FormatSku";
 import {formatNumeroLote} from "../util/FomatNumeroLote";
 import {
-    buscarLoteIdRepository,
     buscarLoteRepository,
-    cadastrarLoteRepository, criarNumeroLoteRepository,
+    cadastrarLoteRepository,
     listLotesRepository
 } from "../repository/LotesRepository";
 
@@ -27,7 +26,6 @@ export default class LotesBusiness{
         const lote = new Lotes()
         const sku = new Skus()
         const testeLote = await this.criarNumeroLote( cadastroLote.skuIdfK , new Date() )
-        console.log(testeLote.numenroLote)
         sku.id = cadastroLote.skuIdfK
         lote.codigoLote = testeLote.numenroLote
         lote.quantidade = cadastroLote.quantidade
@@ -67,16 +65,14 @@ export default class LotesBusiness{
             skuRetorno =  await queryRunner.manager.findOne(Skus , idSku);
             await queryRunner.manager.update(Skus, idSku, {codigoProximoLote : Number(skuRetorno?.codigoProximoLote) + 1} )
             sucesso = true
-            // commit transaction now:
+
             await queryRunner.commitTransaction();
 
         } catch (err) {
             sucesso = false
-            // since we have errors let's rollback changes we made
             await queryRunner.rollbackTransaction();
 
         } finally {
-            // you need to release query runner which is manually created:
             await queryRunner.release();
 
         }
