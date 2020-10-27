@@ -224,6 +224,47 @@ export default class ExemplosController {
             }
         )
     }
+
+    @Get('lote')
+    exemploLote (_: Request , response: Response){
+        response.json(
+            {
+                lote: {
+                    rota: "/lote",
+                    requisicao: {
+                        get: {
+                            heades: {},
+                            params: "",
+                            body:{}
+                        },
+                        getId: {
+                            heades: {},
+                            params: "/lote/:id",
+                            body:{}
+                        },
+
+                        post: {
+                            heades: {},
+                            params: "",
+                            body:{
+                                "quantidade": "number" ,
+                                "sku": "number"
+                            }
+                        },
+                        delete: {
+                            heades: {},
+                            params: "/number",
+                            body:{}
+                        },
+                        update:{ heades: {},
+                            params: "/number",
+                            body:{}}
+                    }
+                },
+
+            }
+        )
+    }
 }
 
 
