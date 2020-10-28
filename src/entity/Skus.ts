@@ -20,6 +20,9 @@ export class Skus {
     @Column({name: 'shelf_life'})
     shelfLife: number
 
+    @Column({name: "dias_vencido"})
+    diasVencido: number
+
     @Column({name: 'codigo_ncm'})
     codigoNCM : string
 

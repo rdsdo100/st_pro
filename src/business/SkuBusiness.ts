@@ -36,6 +36,8 @@ export default class SkuBusiness{
 
     async cadastroSku(sku: Skus){
 
+
+
         try{
             const retorno = await cadastrarSkuRepository(sku)
             return {
@@ -71,5 +73,19 @@ export default class SkuBusiness{
         }
     }
 
+ private geradorVencidos (shelfLife: number) :number {
+     let vencido: number
+        if (shelfLife <= 90){
+            vencido =  Math.round(shelfLife * 0.1)
+        }else {
+            vencido = Math.round(shelfLife * 0.05)
+        }
+if(vencido <= 1){
+    return 1
+}else {
+    return vencido
+}
 
+
+    }
 }

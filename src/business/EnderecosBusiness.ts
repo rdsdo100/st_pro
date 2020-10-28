@@ -1,6 +1,7 @@
 import {Between, getRepository} from "typeorm";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
 import {Estoques} from "../entity/Estoques";
+import {listEstoqueEnderecosRepository} from "../repository/EnderecoRepository";
 
 interface IsCadastroEnderecos {
     estoque: number,
@@ -28,7 +29,7 @@ export default  class EnderecosBusiness{
 
     async buscarTodosEnderecos() {
         const getEnderecoEstoqueRepository = getRepository(EstoqueEnderecos)
-        let  retornos = await getEnderecoEstoqueRepository.find()
+        let  retornos = await listEstoqueEnderecosRepository()
         let retornosformatados = retornos.map(
             retorno => {
                 return {
@@ -38,10 +39,9 @@ export default  class EnderecosBusiness{
                     nivel : retorno.nivel,
                     literal: `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel} `
                 }
-                //return  `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel}`
+
             }
         )
-
 
         return retornosformatados
     }

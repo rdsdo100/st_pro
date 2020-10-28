@@ -9,6 +9,7 @@ export class Skus1603148254726 implements MigrationInterface {
                                     id serial not null primary key,
                                     nome_sku varchar not null,
                                     shelf_life integer not null,
+                                    dias_vencido integer not null,
                                     codigo_ncm varchar not null,
                                     codigo_ean varchar not null,
                                     unidade_venda varchar not null,
