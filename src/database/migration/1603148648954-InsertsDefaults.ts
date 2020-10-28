@@ -26,9 +26,9 @@ export class InsertsDefaults1603148648954 implements MigrationInterface {
         `)
         await queryRunner.query(`
         
-        INSERT INTO skus (id, nome_sku, shelf_life, codigo_ncm, codigo_ean, unidade_venda ,ativo) VALUES
-                (1 , 'CARVEJA' , 180 , '12345678' , '1234567890123', 'UN' , true);
-        
+        INSERT INTO skus (id ,nome_sku, shelf_life, dias_vencido, codigo_ncm, codigo_ean, unidade_venda, ativo) VALUES
+         (1 , 'CARVEJA' , 180 , 10 , '12345678' , '1234567890123', 'UN' , true);
+
         
         `)
 
