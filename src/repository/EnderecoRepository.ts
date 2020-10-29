@@ -6,6 +6,11 @@ const cadastrarEstoqueEnderecosRepository = async (estoqueEnderecos : EstoqueEnd
     return await estoqueEnderecosRepository.save(estoqueEnderecos)
 }
 
+const buscarEstoqueEnderecosRepository = async (zona : string ,rua : string,coluna : string,nivel : string)=>{
+    const estoqueEnderecosRepository = getManager()
+    return estoqueEnderecosRepository.findOne(EstoqueEnderecos , {zona ,rua ,coluna ,nivel })
+}
+
 
 const buscarEstoqueEnderecosIdRepository = async (idEstoqueEnderecos : number)=>{
     const estoqueEnderecosRepository = getManager()
@@ -15,7 +20,6 @@ const buscarEstoqueEnderecosIdRepository = async (idEstoqueEnderecos : number)=>
 const listEstoqueEnderecosRepository = async ()=>{
     const estoqueEnderecosRepository = getManager()
     return estoqueEnderecosRepository.find(EstoqueEnderecos)
-
 }
 
 const updateEstoqueEnderecosRepository = async (estoqueEnderecoss : EstoqueEnderecos)=>{
@@ -26,7 +30,8 @@ const deleteEstoqueEnderecosIdRepository = async (idEstoqueEnderecos : number) =
     const estoqueEnderecosRepository = getManager()
     return estoqueEnderecosRepository.delete(EstoqueEnderecos , idEstoqueEnderecos)
 }
-export {cadastrarEstoqueEnderecosRepository ,
+export {
+    cadastrarEstoqueEnderecosRepository ,
     buscarEstoqueEnderecosRepository,
     buscarEstoqueEnderecosIdRepository,
     listEstoqueEnderecosRepository,
