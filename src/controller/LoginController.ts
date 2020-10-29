@@ -4,6 +4,7 @@ import { Controller, Get } from '@overnightjs/core';
 import {Usuarios} from "../entity/Usuarios";
 import {GrupoUsuarios} from "../entity/GrupoUsuarios";
 import {assinar} from "../config/Jwt";
+import {buscarUsuarioIdRepository, buscarUsuarioRepository} from "../repository/UsuarioRepository";
 
 
 @Controller('login')
@@ -20,10 +21,12 @@ export default class LoginController{
 
             const usuariosRepository = getRepository(Usuarios)
             const usuario = new Usuarios()
-            const tipoUsuarios = new GrupoUsuarios()
 
-            usuario.nomeUsuario = String(request.headers.user)
+
+           let nomeUsuario = String(request.headers.user)
             usuario.senha = String(request.headers.password)
+
+
 
             const getUsuario = await usuariosRepository.findOne(
 

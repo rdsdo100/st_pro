@@ -6,9 +6,9 @@ const cadastrarUsuarioRepository = async (usuario : Usuarios)=>{
     return await usuarioRepository.save(usuario)
 }
 
-const buscarUsuarioRepository = async (codigoUsuario : number)=>{
+const buscarUsuarioRepository = async (nomeUsuario : string)=>{
     const usuarioRepository = getManager()
-    return usuarioRepository.findOne(Usuarios , codigoUsuario )
+    return usuarioRepository.findOne(Usuarios , {nomeUsuario : nomeUsuario} )
 }
 
 const buscarUsuarioIdRepository = async (idUsuario : number)=>{
