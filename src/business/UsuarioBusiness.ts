@@ -7,7 +7,8 @@ export default class UsuarioBusiness{
 
         const setUsuarios = getRepository(Usuarios)
 
-        try {
+
+       /* try {
             const resposta = await setUsuarios.save(usuarios)
             return    resposta
         } catch (err) {
@@ -15,7 +16,7 @@ export default class UsuarioBusiness{
                 mesage : err.mesage ,
                 err}
 
-        }
+        }*/
     }
 
     async deletarUsuario(idDeletar : number){

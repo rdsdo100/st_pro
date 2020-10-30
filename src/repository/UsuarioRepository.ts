@@ -1,10 +1,32 @@
-import {getManager} from "typeorm";
+import {getConnection, getManager} from "typeorm";
 import {Usuarios} from "../entity/Usuarios";
 
-const cadastrarUsuarioRepository = async (usuario : Usuarios)=>{
-    const usuarioRepository = getManager()
-    return await usuarioRepository.save(usuario)
+const cadastrarUsuarioRepository = async (usuario : Usuarios) : Promise<object>=>{
+
+    let usuarioRetorno
+    const connection = getConnection();
+    const queryRunner = connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+        usuarioRetorno =  await queryRunner.manager.findOne(Usuarios , {nomeUsuario : usuario.nomeUsuario} );
+        if(usuarioRetorno?.nomeUsuario === ''){
+            usuarioRetorno = await queryRunner.manager.save(usuario)
+        }else {
+            usuarioRetorno = { mensage: "usuario não cadastrodo!" , ...usuario}
+        }
+        await queryRunner.commitTransaction();
+    } catch (err) {
+
+        await queryRunner.rollbackTransaction();
+    } finally {
+        await queryRunner.release();
+    }
+
+    return { ...usuarioRetorno}
 }
+
 
 const buscarUsuarioRepository = async (nomeUsuario : string)=>{
     const usuarioRepository = getManager()
