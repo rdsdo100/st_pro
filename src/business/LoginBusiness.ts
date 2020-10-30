@@ -1,5 +1,6 @@
 import {assinar} from "../config/Jwt";
 import {buscarUsuarioRepository} from "../repository/UsuarioRepository";
+import {getUnpackedSettings} from "http2";
 
 export default class LoginBusiness {
 
@@ -8,22 +9,18 @@ export default class LoginBusiness {
     }
 
     async login(nomeUsuario: string , senha : string) {
-
-        try {
+        let authorization: string
 
             const getUsuario = await buscarUsuarioRepository(nomeUsuario)
 
-            const authorization =   assinar(
-                Number(getUsuario?.id)
-                , String(getUsuario?.nomeUsuario)
-                , Number(getUsuario?.grupoUsuariosIdFk.id)
+            if ((getUsuario?.nomeUsuario === nomeUsuario)&& (getUsuario.senha === senha)){
 
-            )
-            return {
-                authorization : authorization}
-
-        } catch (error) {
-
-        }
+                 return authorization =  assinar(
+                    Number(getUsuario?.id)
+                    , String(getUsuario?.nomeUsuario)
+                    , Number(getUsuario?.grupoUsuariosIdFk.id))
+            } else {
+                return 'Error'
+            }
     }
 }
