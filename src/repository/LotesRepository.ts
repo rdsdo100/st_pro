@@ -43,7 +43,7 @@ const cadastrarLoteRepository = async (lote : Lotes)=>{
 
 const buscarLoteRepository = async (numeroLote : string)=>{
     const lotesRepository = getManager()
-    return lotesRepository.findOne(Lotes , {codigoLote : numeroLote })
+    return await lotesRepository.findOne(Lotes , {codigoLote : numeroLote })
 }
 
 const buscarLoteIdRepository = async (idLote : number)=>{

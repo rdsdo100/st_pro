@@ -246,6 +246,12 @@ export default class ExemplosController {
                             params: "",
                             body:{}
                         },
+                        getNome: {
+                            heades: {},
+                            params: "",
+                            query: "numeroLote" ,
+                            body:{}
+                        },
                         getId: {
                             heades: {},
                             params: "/lote/:id",

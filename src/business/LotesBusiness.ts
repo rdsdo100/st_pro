@@ -94,7 +94,6 @@ export default class LotesBusiness{
     }
 
     async bucaLotes(numeroLote : string){
-        const lotesRepository = getRepository(Lotes)
         return await buscarLoteRepository(numeroLote)
     }
 

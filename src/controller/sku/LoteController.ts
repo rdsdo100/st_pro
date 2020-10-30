@@ -11,11 +11,8 @@ interface ICadastroLote {
 }
 @Controller('lote')
 @ClassMiddleware([decodificar])
-export default class Sku {
-    @Get()
-    async index(request: Request , response: Response){
+export default class LoteController {
 
-    }
     @Post()
     async cadastrolote(request: Request , response: Response){
 
@@ -29,5 +26,24 @@ export default class Sku {
 
     }
     @Get(':id')
-    async buscaId(request: Request , response: Response){}
+    async buscaId(request: Request , response: Response){
+
+    }
+
+    @Get()
+    async  buscarLote(request: Request , response: Response){
+
+        const numeroLote = String(request.query.numeroLote)
+
+        console.log(numeroLote)
+
+        const lotesBusiness = new LotesBusiness()
+
+        const retorno = await lotesBusiness.bucaLotes(numeroLote)
+
+        return response.json(retorno)
+
+
+
+    }
 }
