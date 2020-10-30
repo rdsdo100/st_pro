@@ -8,15 +8,6 @@ export default class UsuarioBusiness{
         const setUsuarios = getRepository(Usuarios)
 
 
-       /* try {
-            const resposta = await setUsuarios.save(usuarios)
-            return    resposta
-        } catch (err) {
-            return  {
-                mesage : err.mesage ,
-                err}
-
-        }*/
     }
 
     async deletarUsuario(idDeletar : number){
