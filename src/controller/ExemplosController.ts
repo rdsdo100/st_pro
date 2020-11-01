@@ -4,8 +4,8 @@ import {Request, Response} from "express";
 @Controller('exemplos')
 export default class ExemplosController {
 
-    @Get('rotas')
-    exemploRotas (_: Request , response: Response){
+    @Get('usuarios')
+    exemploUsuarios (_: Request , response: Response){
         response.json({
 
                 usuarios: {

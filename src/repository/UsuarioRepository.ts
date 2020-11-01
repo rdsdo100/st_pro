@@ -11,7 +11,7 @@ const cadastrarUsuarioRepository = async (usuario : Usuarios) : Promise<object>=
 
     try {
         usuarioRetorno =  await queryRunner.manager.findOne(Usuarios , {nomeUsuario : usuario.nomeUsuario} );
-        if(usuarioRetorno?.nomeUsuario === ''){
+        if(!(usuarioRetorno?.nomeUsuario === '')){
             usuarioRetorno = await queryRunner.manager.save(usuario)
         }else {
             usuarioRetorno = { mensage: "usuario não cadastrodo!" , ...usuario}
@@ -26,7 +26,6 @@ const cadastrarUsuarioRepository = async (usuario : Usuarios) : Promise<object>=
 
     return { ...usuarioRetorno}
 }
-
 
 const buscarUsuarioRepository = async (nomeUsuario : string)=>{
     const usuarioRepository = getManager()
@@ -50,8 +49,25 @@ const updateUsuarioRepository = async (usuarios : Usuarios)=>{
 
 const deleteUsuarioIdRepository = async (idUsuario : number) => {
     const usuarioRepository = getManager()
-    return usuarioRepository.delete(Usuarios , idUsuario)
+
+    let usuarioRetorno
+    try {
+        usuarioRetorno = await usuarioRepository.delete(Usuarios , idUsuario)
+        if (Number(usuarioRetorno?.affected) >=  1) {
+            usuarioRetorno = {...usuarioRetorno, mesage: "Usuário deletado!"}
+
+        }else {
+            usuarioRetorno = {mesage: "Usuário Não Deletado!"}
+        }
+
+    } catch (err) {
+        return  {
+            mesage : err.mesage ,
+            err}
+    }
+    return usuarioRetorno
 }
+
 export {cadastrarUsuarioRepository ,
     buscarUsuarioRepository,
     buscarUsuarioIdRepository,

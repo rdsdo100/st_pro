@@ -1,24 +1,18 @@
 import {Usuarios} from "../entity/Usuarios";
-import {getRepository} from "typeorm";
+
+import {cadastrarUsuarioRepository, deleteUsuarioIdRepository} from "../repository/UsuarioRepository";
 
 export default class UsuarioBusiness{
 
     async cadastroUsuarios(usuarios : Usuarios){
 
-        const setUsuarios = getRepository(Usuarios)
-
-
+        const usuariosSalvar =  await cadastrarUsuarioRepository(usuarios)
+        return usuariosSalvar
     }
 
     async deletarUsuario(idDeletar : number){
 
-        const setUsuarios = getRepository(Usuarios)
-
-        const resposta = await setUsuarios.findOne({
-            where: {
-                id : idDeletar
-            }
-        })
+        const resposta = await deleteUsuarioIdRepository(idDeletar)
         return resposta
     }
 
