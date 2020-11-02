@@ -26,7 +26,6 @@ interface IsBuscaEnderecos {
 
 export default  class EnderecosBusiness{
 
-
     async buscarTodosEnderecos() {
         const getEnderecoEstoqueRepository = getRepository(EstoqueEnderecos)
         let  retornos = await listEstoqueEnderecosRepository()
@@ -109,5 +108,7 @@ export default  class EnderecosBusiness{
         return enderecos
 
     }
+
+    async bloquearEnderecos(encereco: string){}
 
 }
