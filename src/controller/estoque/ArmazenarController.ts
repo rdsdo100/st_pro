@@ -16,8 +16,10 @@ export default class EnderecoEstoqueController {
     async Armazenar (request: Request, response: Response) {
 
         const armazenarBusiness = new ArmazenarBusiness()
+        const lote:string = String(request.body.lote)
+        const endereco:string = String(request.body.endereco)
 
-       const retorno = await armazenarBusiness.addLoteEndereco("10" , '20')
+       const retorno = await armazenarBusiness.addLoteEndereco(lote , endereco)
        response.json(retorno)
 
     }

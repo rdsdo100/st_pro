@@ -13,7 +13,8 @@ export default class ExemplosController {
                 '/estoque',
                 '/sku',
                 '/endereco',
-                '/lote'
+                '/lote',
+                '/armazenar'
             ]
         })
     }
@@ -279,6 +280,42 @@ export default class ExemplosController {
                                 "quantidade": "number" ,
                                 "sku": "number",
                                 "dataFabricacao": "Date"
+                            }
+                        },
+                        delete: {
+                            heades: {},
+                            params: "/number",
+                            body:{}
+                        },
+                        update:{ heades: {},
+                            params: "/number",
+                            body:{}}
+                    }
+                },
+
+            }
+        )
+    }
+
+    @Get('armazenar')
+    exemploArmazenar (_: Request , response: Response){
+        response.json(
+            {
+                lote: {
+                    rota: "/armazenar",
+                    requisicao: {
+                        get: {
+                            heades: {},
+                            params: "",
+                            body:{}
+                                             },
+                      
+                        post: {
+                            heades: {},
+                            params: "",
+                            body:{
+                                "lote":"string" ,
+                                "endereco":"string"
                             }
                         },
                         delete: {

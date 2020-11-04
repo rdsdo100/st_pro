@@ -6,9 +6,9 @@ import Estoque from "../controller/estoque/EstoqueController";
 import SkuController from "../controller/sku/SkuController";
 import EnderecoEstoqueController from "../controller/estoque/EnderecoEstoqueController";
 import LoginController from "../controller/LoginController";
-import {Lotes} from "../entity/Lotes";
 import LoteController from "../controller/sku/LoteController";
 import ArmazenarController from "../controller/estoque/ArmazenarController";
+import TestController from '../controller/TesteController';
 
 
 const inicio = new Inicio()
@@ -21,6 +21,7 @@ const sku = new SkuController()
 const login = new LoginController()
 const lote = new LoteController()
 const armazenar = new ArmazenarController()
+const testController = new TestController()
 
 
 export const routes = [
@@ -33,7 +34,6 @@ export const routes = [
     sku,
     login,
     lote,
-    armazenar
-
-
+    armazenar,
+    testController
 ]
