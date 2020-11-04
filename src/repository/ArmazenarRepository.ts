@@ -1,6 +1,6 @@
-import {getConnection, getManager} from "typeorm";
+import {getConnection} from "typeorm";
 import SkuBusiness from "../business/SkuBusiness";
-import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
+import {Lotes} from "../entity/Lotes";
 interface IEnderecos{
     estoque: string,
     zona: string,
@@ -10,7 +10,7 @@ interface IEnderecos{
 }
 
 const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
-    const skuBusiness = new SkuBusiness()
+
     let retorno
 
     const connection = getConnection();
@@ -19,7 +19,15 @@ const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
     await queryRunner.startTransaction();
 
     try {
-        retorno = await queryRunner.manager.findOne(EstoqueEnderecos,  {estoqueIdfK: Number(enderecos.estoque) , zona: enderecos.zona} );
+        retorno = await queryRunner.manager.find(Lotes)
+   //     createQueryBuilder()
+        /*    .select()
+            .from(Lotes , 'l')
+            // .where("l.id = :id", { id: 1 })
+            .getMany();
+*/
+
+        console.log(retorno)
 
 
         await queryRunner.commitTransaction();
@@ -29,6 +37,12 @@ const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
     } finally {
         await queryRunner.release();
     }
+
+    return retorno
+}
+
+export {
+    arnazenarRepository
 }
 
 

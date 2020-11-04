@@ -8,6 +8,7 @@ import EnderecoEstoqueController from "../controller/estoque/EnderecoEstoqueCont
 import LoginController from "../controller/LoginController";
 import {Lotes} from "../entity/Lotes";
 import LoteController from "../controller/sku/LoteController";
+import ArmazenarController from "../controller/estoque/ArmazenarController";
 
 
 const inicio = new Inicio()
@@ -19,6 +20,7 @@ const enderecoEstoque = new EnderecoEstoqueController()
 const sku = new SkuController()
 const login = new LoginController()
 const lote = new LoteController()
+const armazenar = new ArmazenarController()
 
 
 export const routes = [
@@ -30,7 +32,8 @@ export const routes = [
     enderecoEstoque,
     sku,
     login,
-    lote
+    lote,
+    armazenar
 
 
 ]
