@@ -1,6 +1,4 @@
 import {getConnection} from "typeorm";
-import SkuBusiness from "../business/SkuBusiness";
-import {Lotes} from "../entity/Lotes";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
 interface IEnderecos{
     estoque: string,
