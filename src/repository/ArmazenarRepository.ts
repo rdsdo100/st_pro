@@ -19,13 +19,13 @@ const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
     await queryRunner.startTransaction();
 
     try {
-        retorno = await queryRunner.manager.find(Lotes)
-   //     createQueryBuilder()
-        /*    .select()
+        retorno = await queryRunner.manager
+            .createQueryBuilder()
+            .select()
             .from(Lotes , 'l')
-            // .where("l.id = :id", { id: 1 })
-            .getMany();
-*/
+            .where("l.id = :id", { id: 1 })
+            .getOne();
+
 
         console.log(retorno)
 

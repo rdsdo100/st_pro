@@ -4,6 +4,20 @@ import {Request, Response} from "express";
 @Controller('exemplos')
 export default class ExemplosController {
 
+    @Get()
+    exemplo(_: Request , response: Response){
+       return  response.json({
+            rotasExemplos: [
+                '/usuarios',
+                '/login',
+                '/estoque',
+                '/sku',
+                '/endereco',
+                '/lote'
+            ]
+        })
+    }
+
     @Get('usuarios')
     exemploUsuarios (_: Request , response: Response){
         response.json({
@@ -80,11 +94,11 @@ export default class ExemplosController {
     }
 
     @Get('login')
-    exemplologin (_: Request , response: Response){
+    exemploLogin (_: Request , response: Response){
         response.json({})
     }
 
-    @Get('estoques')
+    @Get('estoque')
     exemploEstoque (_: Request , response: Response){
         response.json(
             {
