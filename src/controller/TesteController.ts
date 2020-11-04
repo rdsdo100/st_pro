@@ -19,9 +19,9 @@ export default class TestController{
         let con : IEnderecos = {
             estoque: "1",
             zona: "202",
-            rua: "10",
-            coluna: "5",
-            nivel: "2"
+            rua: "12",
+            coluna: "1",
+            nivel: "1"
         }
 
 
