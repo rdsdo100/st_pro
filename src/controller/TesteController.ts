@@ -1,6 +1,7 @@
 import {json, Request, Response} from "express";
 import { Controller, Get } from '@overnightjs/core';
 import {formatEndereco} from "../util/FormatarEndereco";
+import {converterEndereco} from "../util/ConverterEndereco";
 
 interface IEnderecos{
     estoque?: string,
@@ -25,7 +26,10 @@ export default class TestController{
         }
 
 
+        const test = converterEndereco("21511011")
+
         const retorno = formatEndereco(con)
-        return response.json(retorno)
+
+        return response.json(test)
     }
 }
