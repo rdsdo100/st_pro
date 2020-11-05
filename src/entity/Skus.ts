@@ -1,4 +1,5 @@
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -9,7 +10,7 @@ import {
 import {Lotes} from "./Lotes";
 
 @Entity()
-export class Skus {
+export class Skus extends BaseEntity{
 
     @PrimaryGeneratedColumn()
     id: number

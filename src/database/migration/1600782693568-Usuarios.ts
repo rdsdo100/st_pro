@@ -6,7 +6,7 @@ export class Usuarios1600782693568 implements MigrationInterface {
         await  queryRunner.query(`
         
 create table if not exists usuarios (
-                          id  serial not null primary key,
+                          id serial not null primary key,
                           nome_usuario varchar not null,
                           email varchar not null unique,
                           senha varchar not null,

@@ -1,4 +1,5 @@
 import {
+    BaseEntity,
     Column,
     CreateDateColumn,
     Entity,
@@ -11,7 +12,7 @@ import {Estoques} from "./Estoques";
 import {Lotes} from "./Lotes";
 
 @Entity()
-export class EstoqueEnderecos {
+export class EstoqueEnderecos extends BaseEntity{
 
     @PrimaryGeneratedColumn()
     id: number

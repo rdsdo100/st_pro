@@ -1,14 +1,16 @@
-import {Column, 
-    CreateDateColumn, 
-    Entity, 
-    PrimaryGeneratedColumn, 
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
     UpdateDateColumn,
     ManyToOne,
-JoinColumn} from "typeorm";
+    JoinColumn, BaseEntity
+} from "typeorm";
 import { GrupoUsuarios } from "./GrupoUsuarios";
 
 @Entity()
-export class Usuarios {
+export class Usuarios extends BaseEntity {
 
 @PrimaryGeneratedColumn()
     id: number
