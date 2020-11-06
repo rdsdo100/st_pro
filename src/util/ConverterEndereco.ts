@@ -1,13 +1,14 @@
 interface IEnderecos{
     estoque?: string,
-    zona: string,
-    rua: string,
-    coluna: string,
-    nivel: string
+    zona?: string,
+    rua?: string,
+    coluna?: string,
+    nivel?: string
+    message?: string
 }
 
 const  converterEndereco = (enderecos:string)  => {
-    let enderecoConvertido
+    let enderecoConvertido: IEnderecos
 
     if(enderecos.length === 9) {
 
@@ -23,7 +24,7 @@ const  converterEndereco = (enderecos:string)  => {
             nivel,
         }
     }else {
-        enderecoConvertido = "Endereco Invalido!"
+        enderecoConvertido = {message : "Endereco Invalido!"}
     }
 
     return enderecoConvertido

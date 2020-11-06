@@ -1,31 +1,26 @@
 import {arnazenarRepository} from "../repository/ArmazenarRepository";
+import {converterEndereco} from "../util/ConverterEndereco";
 interface IEnderecos{
-    estoque: string,
-    zona: string,
-    rua: string,
-    coluna: string,
-    nivel: string
+    estoque?: string,
+    zona?: string,
+    rua?: string,
+    coluna?: string,
+    nivel?: string
+    message?: string
 }
 
 export  default class ArmazenarBusiness {
 
     async addLoteEndereco(lote: string, enderecos: string) {
 
-        let enderco : IEnderecos = {
-            estoque: "1",
-            zona: '101',
-            rua: '2',
-            coluna: '1',
-            nivel: "1"
-        }
+        let enderco : IEnderecos = converterEndereco(enderecos)
 
-        lote = "10"
-       const armazenar = await arnazenarRepository('202120011' , enderco)
-        return armazenar
+      /* const armazenar = await arnazenarRepository('202120011' , enderco)
+        return armazenar*/
 
     }
 
-    async removeLoteEndereco(lote: string, enderecos: string) {
+    async desarmazenarLoteEndereco(lote: string, enderecos: string) {
 
     }
 
