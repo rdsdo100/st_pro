@@ -20,7 +20,7 @@ export  default class ArmazenarBusiness {
         }
 
         lote = "10"
-       const armazenar = await arnazenarRepository(lote , enderco)
+       const armazenar = await arnazenarRepository('202120011' , enderco)
         return armazenar
 
     }

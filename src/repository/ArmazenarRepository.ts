@@ -29,10 +29,12 @@ const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
                 }
             })*/
         retorno = await queryRunner.manager.createQueryBuilder()
-            .select("user")
+            .select()
             .from(EstoqueEnderecos, "ee")
             .where("ee.id = :id", { id: 1 })
             .getOne();
+
+
 
                     /*estoqueIdfK : enderecos.estoque,
                     zona: enderecos.zona,

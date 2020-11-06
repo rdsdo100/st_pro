@@ -2,6 +2,9 @@ import {json, Request, Response} from "express";
 import { Controller, Get } from '@overnightjs/core';
 import {formatEndereco} from "../util/FormatarEndereco";
 import {converterEndereco} from "../util/ConverterEndereco";
+import EstoquesBusiness from "../business/EstoquesBusiness";
+import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
+import {getManager} from "typeorm";
 
 interface IEnderecos{
     estoque?: string,
@@ -16,20 +19,18 @@ interface IEnderecos{
 export default class TestController{
 
     @Get()
-    async login(request: Request , response: Response) {
-        let con : IEnderecos = {
-            estoque: "1",
-            zona: "202",
-            rua: "12",
-            coluna: "1",
-            nivel: "1"
-        }
+    async Test(request: Request , response: Response) {
+
+        const user = await getManager()
+            .createQueryBuilder(EstoqueEnderecos, "user")
+            .where("user.id = :id and user.zona = :zona", { id: 100 , zona: 200 })
+
+            .getOne();
+        console.log(user)
 
 
-        const test = converterEndereco("21511011")
+        return response.json(user)
 
-        const retorno = formatEndereco(con)
 
-        return response.json(test)
     }
 }
