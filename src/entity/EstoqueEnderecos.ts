@@ -18,16 +18,16 @@ export class EstoqueEnderecos extends BaseEntity{
     id: number
 
     @Column()
-    zona: string
+    zona: number
 
     @Column()
-    rua: string
+    rua: number
 
     @Column()
-    coluna: string
+    coluna: number
 
     @Column()
-    nivel: string
+    nivel: number
 
     @Column()
     ativo:boolean

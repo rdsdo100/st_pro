@@ -2,11 +2,11 @@ import {getConnection} from "typeorm";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
 import {Lotes} from "../entity/Lotes";
 interface IEnderecos{
-    estoque?: string,
-    zona?: string,
-    rua?: string,
-    coluna?: string,
-    nivel?: string,
+    estoque?: number,
+    zona?: number,
+    rua?: number,
+    coluna?: number,
+    nivel?: number,
     message?: string
 }
 

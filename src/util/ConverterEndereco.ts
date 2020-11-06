@@ -1,9 +1,9 @@
 interface IEnderecos{
-    estoque?: string,
-    zona?: string,
-    rua?: string,
-    coluna?: string,
-    nivel?: string
+    estoque?: number,
+    zona?: number,
+    rua?: number,
+    coluna?: number,
+    nivel?: number
     message?: string
 }
 
@@ -18,10 +18,10 @@ const  converterEndereco = (enderecos:string)  => {
         const nivel: string = enderecos.substring(8, 9)
 
         enderecoConvertido = {
-            zona,
-            rua,
-            coluna,
-            nivel,
+            zona: Number(zona),
+            rua: Number(rua),
+            coluna: Number(coluna),
+            nivel: Number(nivel),
         }
     }else {
         enderecoConvertido = {message : "Endereco Invalido!"}

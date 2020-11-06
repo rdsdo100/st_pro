@@ -17,7 +17,7 @@ interface IsCadastroEnderecos {
 
 interface IsBuscaEnderecos {
     estoque: number,
-    zona: string ,
+    zona: number ,
     rua: number ,
     coluna: number ,
     nivelI: number
@@ -27,22 +27,8 @@ interface IsBuscaEnderecos {
 export default  class EnderecosBusiness{
 
     async buscarTodosEnderecos() {
-        const getEnderecoEstoqueRepository = getRepository(EstoqueEnderecos)
-        let  retornos = await listEstoqueEnderecosRepository()
-        let retornosformatados = retornos.map(
-            retorno => {
-                return {
-                    zona : retorno.zona,
-                    rua :retorno.rua,
-                    coluna : retorno.coluna,
-                    nivel : retorno.nivel,
-                    literal: `${retorno.zona}-${retorno.rua}-${retorno.coluna}-${retorno.nivel} `
-                }
 
-            }
-        )
 
-        return retornosformatados
     }
 
     async cadastroEnderecos (gerador: IsCadastroEnderecos){
@@ -94,10 +80,10 @@ export default  class EnderecosBusiness{
             for (let j = gerador.colunaI ; j <= gerador.colunaF ; j++) {
                 for (let l = gerador.nivelI; l<= gerador.nivelF; l++) {
                     const estoqueEnderecos = new EstoqueEnderecos()
-                    estoqueEnderecos.zona = String(gerador.zona)
-                    estoqueEnderecos.rua = String(i)
-                    estoqueEnderecos.coluna = String(j)
-                    estoqueEnderecos.nivel = String(l)
+                    estoqueEnderecos.zona = Number(gerador.zona)
+                    estoqueEnderecos.rua = Number(i)
+                    estoqueEnderecos.coluna = Number(j)
+                    estoqueEnderecos.nivel = Number(l)
                     estoqueEnderecos.ativo = true
                     estoqueEnderecos.estoqueIdfK = estoques
                     enderecos.push(estoqueEnderecos)

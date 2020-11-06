@@ -6,7 +6,7 @@ const cadastrarEstoqueEnderecosRepository = async (estoqueEnderecos : EstoqueEnd
     return await estoqueEnderecosRepository.save(estoqueEnderecos)
 }
 
-const buscarEstoqueEnderecosRepository = async (zona : string ,rua : string,coluna : string,nivel : string)=>{
+const buscarEstoqueEnderecosRepository = async (zona : number ,rua : number, coluna : number,nivel : number)=>{
     const estoqueEnderecosRepository = getManager()
     return estoqueEnderecosRepository.findOne(EstoqueEnderecos , {zona ,rua ,coluna ,nivel })
 }
