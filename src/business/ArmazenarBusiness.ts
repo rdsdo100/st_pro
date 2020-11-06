@@ -9,14 +9,19 @@ interface IEnderecos{
     message?: string
 }
 
+
 export  default class ArmazenarBusiness {
 
     async addLoteEndereco(lote: string, enderecos: string) {
 
-        let enderco : IEnderecos = converterEndereco(enderecos)
+        let endereco : IEnderecos = converterEndereco(enderecos)
+         endereco.estoque = String(1)
 
-      /* const armazenar = await arnazenarRepository('202120011' , enderco)
-        return armazenar*/
+
+       const armazenar = await arnazenarRepository(lote , endereco)
+        return armazenar
+
+
 
     }
 

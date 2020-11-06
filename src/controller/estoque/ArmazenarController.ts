@@ -7,19 +7,21 @@ import ArmazenarBusiness from "../../business/ArmazenarBusiness";
 @Controller('armazenar')
 //@ClassMiddleware([decodificar])
 export default class EnderecoEstoqueController {
-    @Get()
+  /*  @Get()
     async index(request: Request, response: Response) {
 
-    }
+    }*/
 
-    @Post()
+    @Get('alocar')
     async Armazenar (request: Request, response: Response) {
 
         const armazenarBusiness = new ArmazenarBusiness()
-        const lote:string = String(request.body.lote)
-        const endereco:string = String(request.body.endereco)
+        const lote:string = String(request.query.lote)
+        const endereco:string = String(request.query.endereco)
 
-       const retorno = await armazenarBusiness.addLoteEndereco(lote , endereco)
+
+
+      const retorno = await armazenarBusiness.addLoteEndereco(lote , endereco)
        response.json(retorno)
 
     }

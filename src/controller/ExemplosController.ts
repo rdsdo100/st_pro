@@ -305,18 +305,20 @@ export default class ExemplosController {
                     rota: "/armazenar",
                     requisicao: {
                         get: {
+                            rota: "/armazenar/alocar",
                             heades: {},
                             params: "",
+                            query: {
+                                lote:"string" ,
+                                endereco:"string"
+                            },
                             body:{}
                                              },
                       
                         post: {
                             heades: {},
                             params: "",
-                            body:{
-                                "lote":"string" ,
-                                "endereco":"string"
-                            }
+                            body:{}
                         },
                         delete: {
                             heades: {},

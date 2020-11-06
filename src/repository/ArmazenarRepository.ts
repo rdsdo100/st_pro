@@ -2,11 +2,12 @@ import {getConnection} from "typeorm";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
 import {Lotes} from "../entity/Lotes";
 interface IEnderecos{
-    estoque: string,
-    zona: string,
-    rua: string,
-    coluna: string,
-    nivel: string
+    estoque?: string,
+    zona?: string,
+    rua?: string,
+    coluna?: string,
+    nivel?: string,
+    message?: string
 }
 
 const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
