@@ -12,7 +12,7 @@ export default class EnderecoEstoqueController {
         const  enderecosBusiness = new EnderecosBusiness()
         const retorno = await enderecosBusiness.buscarTodosEnderecos()
         return response.json( {
-            qtdEnderecos: retorno.length,
+            //qtdEnderecos: retorno.length,
             retorno
         })
     }

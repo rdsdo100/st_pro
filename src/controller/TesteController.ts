@@ -23,7 +23,7 @@ export default class TestController{
 
         const user = await getManager()
             .createQueryBuilder(EstoqueEnderecos, "user")
-            .where("user.id = :id and user.zona = :zona", { id: 100 , zona: 200 })
+            .where("user.id = :id", { id: 100  })
 
             .getOne();
         console.log(user)

@@ -7,10 +7,10 @@ import ArmazenarBusiness from "../../business/ArmazenarBusiness";
 @Controller('armazenar')
 //@ClassMiddleware([decodificar])
 export default class EnderecoEstoqueController {
-  /*  @Get()
+    @Get()
     async index(request: Request, response: Response) {
 
-    }*/
+    }
 
     @Get('alocar')
     async Armazenar (request: Request, response: Response) {
