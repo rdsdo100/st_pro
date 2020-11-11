@@ -1,8 +1,5 @@
 import {json, Request, Response} from "express";
 import { Controller, Get } from '@overnightjs/core';
-import {formatEndereco} from "../util/FormatarEndereco";
-import {converterEndereco} from "../util/ConverterEndereco";
-import EstoquesBusiness from "../business/EstoquesBusiness";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
 import {getManager} from "typeorm";
 
