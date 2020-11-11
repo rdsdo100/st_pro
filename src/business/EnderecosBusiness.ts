@@ -28,6 +28,7 @@ export default  class EnderecosBusiness{
 
     async buscarTodosEnderecos() {
 
+        return listEstoqueEnderecosRepository()
 
     }
 

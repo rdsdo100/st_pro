@@ -6,7 +6,7 @@ interface IEnderecos{
     nivel: string
 }
 
-const  formatEndereco = (enderecos:IEnderecos) :string => {
+const  formatarEndereco = (enderecos:IEnderecos) :string => {
     let enderecoFormatado: string
 
     if((enderecos.zona.length === 3 )&&
@@ -31,4 +31,4 @@ const  formatEndereco = (enderecos:IEnderecos) :string => {
 
 }
 
-export {formatEndereco};
+export {formatarEndereco};

@@ -2,6 +2,7 @@ import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {Request, Response} from "express";
 import {decodificar} from "../../config/Jwt";
 import EnderecosBusiness from "../../business/EnderecosBusiness";
+import {formatarEndereco} from "../../util/FormatarEndereco";
 
 @Controller('estoques-endereco')
 @ClassMiddleware([decodificar])
@@ -11,9 +12,26 @@ export default class EnderecoEstoqueController {
 
         const  enderecosBusiness = new EnderecosBusiness()
         const retorno = await enderecosBusiness.buscarTodosEnderecos()
+        const retornoFomatado = retorno.map(ret => {
+            const EndFormat =  formatarEndereco({
+                zona : String(ret.zona) ,
+                coluna  : String(ret.coluna) ,
+                nivel : String(ret.nivel) ,
+                rua: String(ret.rua)
+            })
+
+            delete ret.createdAt
+            delete ret.updatedAt
+            delete ret.estoqueIdfK.createdAt
+            delete ret.estoqueIdfK.updatedAt
+
+            return  {...ret , EndFormat}
+
+
+        } )
         return response.json( {
-            //qtdEnderecos: retorno.length,
-            retorno
+            qtdEnderecos: retorno.length,
+            retornoFomatado
         })
     }
 
