@@ -20,36 +20,8 @@ const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
     await queryRunner.startTransaction();
 
     try {
-        retornoEndereco = await queryRunner.manager.getRepository(EstoqueEnderecos).findOne(
-            {
-                where:{
-                    estoqueIdfK : enderecos.estoque,
-                    zona: enderecos.zona,
-                    rua: enderecos.rua,
-                    coluna: enderecos.coluna,
-                    nivel: enderecos.nivel
-                }
-            })
-        retornoLote = await queryRunner.manager.getRepository(Lotes).findOne(
-            {
 
-                where:{
-                    codigoLote: lote
-                }
-            })
-
-        if(!retornoEndereco?.enderecoAlocado){
-
-            if(retornoLote?.codigoLote === lote){
-
-                enderecoUpdate.lote.id = retornoLote.id
-                enderecoUpdate.enderecoAlocado = true
-
-                retorno = await  queryRunner.manager
-                    .update(EstoqueEnderecos , {id : retornoEndereco?.id} , enderecoUpdate )
-            }
-        }
-
+       
         await queryRunner.commitTransaction();
     } catch (err) {
 
