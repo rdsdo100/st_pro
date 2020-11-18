@@ -1,5 +1,6 @@
 import {getConnection} from "typeorm";
 import {EstoqueEnderecos} from "../entity/EstoqueEnderecos";
+import {Lotes} from "../entity/Lotes";
 interface IEnderecos{
     estoque?: number,
     zona?: number,
@@ -21,8 +22,7 @@ const arnazenarRepository = async (lote: string, enderecos: IEnderecos) => {
 
     try {
 
-retornoEndereco = await queryRunner.manager.getRepository(EstoqueEnderecos).findOne(
-    {
+retornoEndereco = await queryRunner.manager.getRepository(EstoqueEnderecos).findOne({
         where: {
             zona : enderecos.zona,
             rua: enderecos.rua,
@@ -30,11 +30,15 @@ retornoEndereco = await queryRunner.manager.getRepository(EstoqueEnderecos).find
             nivel: enderecos.nivel,
             estoqueIdfK:  enderecos.estoque
         }
-    }
-)
+    })
+        retornoLote = await  queryRunner.manager.getRepository(Lotes).findOne({
+            where:{
+                codigoLote : lote
+            }
+        })
         
 
-        console.log({enderecos ,lote ,retornoEndereco})
+        console.log({retornoLote ,retornoEndereco})
 
 
 

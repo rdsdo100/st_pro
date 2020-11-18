@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors'
 import {routes} from './routes/routes';
 
-
 export class SetupServer extends Server {
 
   constructor(private port = 3333) {
@@ -12,7 +11,6 @@ export class SetupServer extends Server {
 
   public async init(): Promise<void> {
     this.setupExpress();
-
 
   }
 
@@ -34,4 +32,3 @@ export class SetupServer extends Server {
     });
   }
 }
-
