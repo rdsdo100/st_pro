@@ -20,10 +20,7 @@ export default class EnderecoEstoqueController {
                 rua: String(ret.rua)
             })
 
-            delete ret.createdAt
-            delete ret.updatedAt
-            delete ret.estoqueIdfK.createdAt
-            delete ret.estoqueIdfK.updatedAt
+
 
             return  {...ret , EndFormat}
 
