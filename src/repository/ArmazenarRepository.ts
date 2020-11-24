@@ -38,7 +38,13 @@ retornoEndereco = await queryRunner.manager.getRepository(EstoqueEnderecos).find
         })
         
 
-        console.log({retornoLote ,retornoEndereco})
+        if(retornoLote && retornoEndereco ){
+            console.log({retornoLote ,retornoEndereco})
+        }else {
+
+        }
+
+
 
 
 
@@ -52,6 +58,7 @@ retornoEndereco = await queryRunner.manager.getRepository(EstoqueEnderecos).find
 
     return retorno
 }
+
 export { arnazenarRepository }
 
 

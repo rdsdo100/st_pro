@@ -3,10 +3,9 @@ import {Skus} from "../../entity/Skus";
 import {ClassMiddleware, Controller, Get, Post} from "@overnightjs/core";
 import {decodificar} from "../../config/Jwt";
 import SkuBusiness from "../../business/SkuBusiness";
-import {cadastrarSkuRepository} from "../../repository/SkusRepository";
 
 @Controller('sku')
-//@ClassMiddleware([decodificar])
+@ClassMiddleware([decodificar])
 export default class SkuController {
 
     @Get()
@@ -40,7 +39,7 @@ export default class SkuController {
             const retorno = await skuBusiness.cadastroSku(skus)
             return response.json({
                 retorno,
-               /* mesage: `Sku cadastrado ${retorno.id} - ${retorno.nomesku}.`*/ })
+                })
 
         }
 

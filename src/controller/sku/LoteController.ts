@@ -42,8 +42,5 @@ export default class LoteController {
         const retorno = await lotesBusiness.bucaLotes(numeroLote)
 
         return response.json(retorno)
-
-
-
     }
 }
