@@ -36,6 +36,6 @@ export class Lotes extends BaseEntity{
     @JoinColumn([{name: "sku_id_fk", referencedColumnName: "id"}])
     skuIdfK: Skus
 
-    @OneToOne(() => EstoqueEnderecos, estoqueEnderecos => estoqueEnderecos.lote) // specify inverse side as a second parameter
+    @OneToOne(() => EstoqueEnderecos, estoqueEnderecos => estoqueEnderecos.loteIdfK) // specify inverse side as a second parameter
     estoqueEnderecos: EstoqueEnderecos;
 }

@@ -40,6 +40,13 @@ retornoEndereco = await queryRunner.manager.getRepository(EstoqueEnderecos).find
 
         if(retornoLote && retornoEndereco ){
             console.log({retornoLote ,retornoEndereco})
+
+            const ret = await queryRunner.manager.getRepository(EstoqueEnderecos)
+                .update(retornoEndereco.id , {
+                    loteIdfK : retornoLote , enderecoAlocado: true
+                })
+            console.log({ret})
+
         }else {
 
         }
