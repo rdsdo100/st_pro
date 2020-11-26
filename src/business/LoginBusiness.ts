@@ -18,7 +18,8 @@ export default class LoginBusiness {
                  return authorization =  assinar(
                     Number(getUsuario?.id)
                     , String(getUsuario?.nomeUsuario)
-                    , Number(getUsuario?.grupoUsuariosIdFk.id))
+                    , Number(getUsuario?.grupoUsuariosIdFk.id),
+                     Number(1) )
             } else {
                 return 'Error'
             }
