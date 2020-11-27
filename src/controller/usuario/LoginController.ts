@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import { Controller, Get } from '@overnightjs/core';
-import LoginBusiness from "../business/LoginBusiness";
+import LoginBusiness from "../../business/LoginBusiness";
 
 
 @Controller('login')
