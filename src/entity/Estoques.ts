@@ -7,9 +7,8 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
-
-
 import {EstoqueEnderecos} from "./EstoqueEnderecos";
+import {UsuarioEstoque} from "./UsuarioEstoque";
 
 
 @Entity()
@@ -29,10 +28,10 @@ export class Estoques extends BaseEntity{
     @UpdateDateColumn({ type: "timestamp" })
     updatedAt: Date;
 
-
-
-
     @OneToMany(() => EstoqueEnderecos, (estoqueEnderecos) => estoqueEnderecos.estoqueIdfK)
     estoqueEnderecos:EstoqueEnderecos[];
+
+    @OneToMany(() => UsuarioEstoque, (usuariosEstoque) => usuariosEstoque.estoquesIdFk)
+    usuarioEstoque:UsuarioEstoque[];
 
 }

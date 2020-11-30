@@ -5,9 +5,10 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
     ManyToOne,
-    JoinColumn, BaseEntity
+    JoinColumn, BaseEntity, OneToMany
 } from "typeorm";
 import { GrupoUsuarios } from "./GrupoUsuarios";
+import {UsuarioEstoque} from "./UsuarioEstoque";
 
 @Entity()
 export class Usuarios extends BaseEntity {
@@ -38,5 +39,7 @@ export class Usuarios extends BaseEntity {
     @JoinColumn([{name: "grupo_usuarios_id_fk", referencedColumnName: "id"}])
     grupoUsuariosIdFk: GrupoUsuarios
 
+    @OneToMany(() => UsuarioEstoque, (usuariosEstoque) => usuariosEstoque.usuarioIdFk)
+    usuarioEstoque:UsuarioEstoque[];
     
 }
