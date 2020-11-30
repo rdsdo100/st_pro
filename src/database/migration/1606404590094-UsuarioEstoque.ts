@@ -10,7 +10,9 @@ export class UsuarioEstoque1606404590094 implements MigrationInterface {
                                  usuario_id_fk int not null,
                                  estoque_id_fk int not null,
                                  constraint usuario_estoque_usuarios foreign key (usuario_id_fk) references usuarios,
-                                 constraint usuario_estoque_estoques foreign key (estoque_id_fk) references estoques
+                                 constraint estoque_estoque_estoques foreign key (estoque_id_fk) references estoques,
+                                 created_at timestamp default now() not null,
+                                 updated_at timestamp default now() not null
 );
     `)
     }

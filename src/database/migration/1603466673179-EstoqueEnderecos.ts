@@ -13,12 +13,12 @@ export class EstoqueEnderecos1603466673179 implements MigrationInterface {
                                                  reserva boolean default false not null,
                                                  endereco_alocado boolean default false not null,
                                                  ativo boolean not null,
-                                                 "createdAt" timestamp default now() not null,
-                                                 "updatedAt" timestamp default now() not null,
                                                  estoque_id_fk integer ,
                                                  lotes_id_fk   integer unique ,
                                                  constraint estoque_enderecos_lotes foreign key (lotes_id_fk) references lotes (id),
-                                                 constraint estoque_enderecos_estoque foreign key (estoque_id_fk) references estoques (id)
+                                                 constraint estoque_enderecos_estoque foreign key (estoque_id_fk) references estoques (id),
+                                                created_at timestamp default now() not null,
+                                                updated_at timestamp default now() not null
 );
         
         `)

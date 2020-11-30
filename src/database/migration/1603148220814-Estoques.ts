@@ -8,8 +8,8 @@ export class Estoques1603148220814 implements MigrationInterface {
         create table if not exists estoques (
                                         id serial not null primary key,
                                         nome_estoque varchar not null,
-                                        "createdAt" timestamp default now() not null,
-                                        "updatedAt" timestamp default now() not null
+                                        created_at timestamp default now() not null,
+                                        updated_at timestamp default now() not null
 );
         `)
 

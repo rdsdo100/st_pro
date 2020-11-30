@@ -15,9 +15,9 @@ export class UsuarioEstoque {
     @JoinColumn([{name: "usuario_id_fk", referencedColumnName: "id"}])
     usuarioIdFk: Usuarios
 
-    @CreateDateColumn()
+    @CreateDateColumn({name: "updated_at"})
     createdAt: Date;
 
-    @UpdateDateColumn({ type: "timestamp" })
+    @UpdateDateColumn({ type: "timestamp" , name:"updated_at" })
     updatedAt: Date;
 }

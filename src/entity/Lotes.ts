@@ -26,10 +26,10 @@ export class Lotes extends BaseEntity{
     @Column({name: "data_fabricacao"})
     dataFabricacao: Date
 
-    @CreateDateColumn()
+    @CreateDateColumn({name: "updated_at"})
     createdAt: Date;
 
-    @UpdateDateColumn({ type: "timestamp" })
+    @UpdateDateColumn({ type: "timestamp" , name:"updated_at" })
     updatedAt: Date;
 
     @ManyToOne(() => Skus, (skus) => skus.lote, {eager: true})

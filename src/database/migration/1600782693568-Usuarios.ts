@@ -11,10 +11,10 @@ create table if not exists usuarios (
                           email varchar not null unique,
                           senha varchar not null,
                           matricula varchar not null,
-                          "createdAt" timestamp default now() not null,
-                          "updatedAt" timestamp default now() not null,
                           grupo_usuarios_id_fk integer,
-                          constraint usuarios_grupo_usuarios_id_fk foreign key (grupo_usuarios_id_fk) references grupo_usuarios (id)
+                          constraint usuarios_grupo_usuarios_id_fk foreign key (grupo_usuarios_id_fk) references grupo_usuarios (id),
+                          created_at timestamp default now() not null,
+                          updated_at timestamp default now() not null
 );
 
         `)

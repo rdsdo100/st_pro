@@ -7,8 +7,8 @@ export class GrupoUsuarios1600782688818 implements MigrationInterface {
 create table if not exists grupo_usuarios (
                                 id serial not null primary key,
                                 nome varchar not null,
-                                "createdAt" timestamp default now() not null,
-                                "updatedAt" timestamp default now() not null
+                                created_at timestamp default now() not null,
+                                updated_at timestamp default now() not null
 );     
         `)
     }

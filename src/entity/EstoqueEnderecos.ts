@@ -38,10 +38,10 @@ export class EstoqueEnderecos extends BaseEntity{
     @Column({name:"endereco_alocado" , default: false})
      enderecoAlocado : boolean
 
-    @CreateDateColumn()
+    @CreateDateColumn({name: "updated_at"})
     createdAt: Date;
 
-    @UpdateDateColumn({ type: "timestamp" })
+    @UpdateDateColumn({ type: "timestamp" , name:"updated_at" })
     updatedAt: Date;
 
     @ManyToOne(() => Estoques, (estoques) => estoques.estoqueEnderecos, {eager: true})

@@ -22,10 +22,10 @@ export class Estoques extends BaseEntity{
 
 
 
-    @CreateDateColumn()
+    @CreateDateColumn({name: "updated_at"})
     createdAt: Date;
 
-    @UpdateDateColumn({ type: "timestamp" })
+    @UpdateDateColumn({ type: "timestamp" , name:"updated_at" })
     updatedAt: Date;
 
     @OneToMany(() => EstoqueEnderecos, (estoqueEnderecos) => estoqueEnderecos.estoqueIdfK)
