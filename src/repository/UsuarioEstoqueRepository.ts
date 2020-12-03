@@ -1,4 +1,9 @@
+import {getManager} from "typeorm";
+import {UsuarioEstoque} from "../entity/UsuarioEstoque";
 
-const buscarSkuIdRepository = async (idSku : number)=>{
+const buscarEstoqueUsuarioRepository = async (nomeUsuario : string)=>{
+
+    const skuRepository = getManager()
+    return await skuRepository.find(UsuarioEstoque)
 
 }
